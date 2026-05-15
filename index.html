@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Quantum waves &amp; probability | CJF Hal AI</title>
+  <meta name="description" content="Wave–particle duality, double-slit interference, Born's rule, and Feynman's sum over paths — a visual guide to quantum probability." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180" />
+  <meta name="theme-color" content="#0a1024" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Quantum waves" />
+  <style>
+    :root {
+      --bg: #0a1024;
+      --panel: #121a36;
+      --panel-soft: rgba(18, 26, 54, 0.92);
+      --text: #e8ecf8;
+      --muted: #9aa8c8;
+      --accent: #38bdf8;
+      --accent-2: #a78bfa;
+      --accent-3: #34d399;
+      --warn: #fbbf24;
+      --border: #2a3a62;
+      --radius: 14px;
+      --shadow: 0 16px 42px rgba(0, 0, 0, 0.38);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      color: var(--text);
+      line-height: 1.65;
+      background:
+        radial-gradient(ellipse 90% 60% at 50% -15%, rgba(56, 189, 248, 0.14), transparent 55%),
+        radial-gradient(ellipse 70% 50% at 100% 20%, rgba(167, 139, 250, 0.1), transparent 50%),
+        linear-gradient(180deg, #070c1a 0%, var(--bg) 40%, #080f22 100%);
+      padding: max(1rem, env(safe-area-inset-top)) clamp(1rem, 4vw, 2.5rem) calc(2.5rem + env(safe-area-inset-bottom));
+    }
+    main { max-width: 54rem; margin: 0 auto; }
+    .page-brand { margin-bottom: 1.25rem; }
+    .page-brand-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(0.65rem, 2.5vw, 1.25rem);
+      flex-wrap: wrap;
+    }
+    .brand-logo {
+      max-width: min(280px, 76vw);
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+    .brand-icon-apple {
+      width: clamp(58px, 15vw, 78px);
+      height: auto;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+    h1 {
+      font-weight: 600;
+      font-size: clamp(1.65rem, 4vw, 2.15rem);
+      letter-spacing: -0.02em;
+      margin: 0 0 0.35rem;
+    }
+    .subtitle { color: var(--muted); font-size: 1.05rem; margin-bottom: 1.5rem; }
+    nav.toc, .sym-index {
+      background: var(--panel-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.15rem;
+      margin: 1.5rem 0 2rem;
+    }
+    nav.toc h2, .sym-index h2 {
+      margin: 0 0 0.6rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    nav.toc ol { margin: 0; padding-left: 1.2rem; columns: 1; }
+    @media (min-width: 640px) { nav.toc ol { columns: 2; column-gap: 1.5rem; } }
+    nav.toc a { color: var(--accent); text-decoration: none; }
+    nav.toc a:hover { text-decoration: underline; }
+    .sym-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    .sym-table th, .sym-table td {
+      text-align: left;
+      padding: 0.45rem 0.5rem;
+      border-bottom: 1px solid rgba(42, 58, 98, 0.6);
+      vertical-align: top;
+    }
+    .sym-table th { color: var(--muted); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .sym-table .glyph {
+      font-family: "Cambria Math", "Times New Roman", serif;
+      font-size: 1.2rem;
+      color: #dbeafe;
+      white-space: nowrap;
+    }
+    .sym-table a { color: var(--accent); text-decoration: none; }
+    .sym-table a:hover { text-decoration: underline; }
+    section { scroll-margin-top: 1rem; }
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 2.25rem 0 0.75rem;
+      color: #c5d4f5;
+    }
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.5rem;
+      color: #b8c8ea;
+    }
+    p { margin: 0.75rem 0; }
+    ul, ol { margin: 0.6rem 0; padding-left: 1.25rem; }
+    li { margin: 0.35rem 0; }
+    .diagram-wrap {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem 1.15rem;
+      margin: 1.35rem 0;
+      overflow-x: auto;
+    }
+    .diagram-wrap svg, .diagram-wrap canvas {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+    }
+    .demo-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.1rem;
+      align-items: flex-end;
+      margin: 0.85rem 0 0.5rem;
+      font-size: 0.92rem;
+    }
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      min-width: 8rem;
+    }
+    .control-group label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+    input[type="range"] { width: min(220px, 100%); accent-color: var(--accent); }
+    select, button {
+      font: inherit;
+      color: var(--text);
+      background: #1a2548;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.4rem 0.65rem;
+      cursor: pointer;
+    }
+    button:hover, select:hover { border-color: var(--accent); }
+    button.primary {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: rgba(56, 189, 248, 0.45);
+      color: #bae6fd;
+    }
+    .mode-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.65rem;
+    }
+    .mode-tabs button {
+      font-size: 0.85rem;
+      padding: 0.35rem 0.7rem;
+    }
+    .mode-tabs button.active {
+      background: rgba(167, 139, 250, 0.22);
+      border-color: var(--accent-2);
+      color: #e9d5ff;
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.25rem;
+      margin-top: 0.65rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+      justify-content: center;
+    }
+    .legend span { display: inline-flex; align-items: center; gap: 0.35rem; }
+    .swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+    .math {
+      font-family: "Cambria Math", "Times New Roman", serif;
+      font-size: 1.08em;
+      padding: 0.05em 0.15em;
+      color: #dbeafe;
+    }
+    dfn.sym-name {
+      font-style: normal;
+      font-weight: 600;
+      color: #bae6fd;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      font-size: 0.92em;
+    }
+    a.sym-ref {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(56, 189, 248, 0.45);
+    }
+    a.sym-ref:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    .eq-block {
+      background: rgba(56, 189, 248, 0.06);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      margin: 1rem 0;
+      overflow-x: auto;
+      text-align: center;
+      font-family: "Cambria Math", "Times New Roman", serif;
+      font-size: 1.15rem;
+    }
+    .eq-block .label {
+      display: block;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+      text-align: left;
+    }
+    .eq-block.text-left { text-align: left; font-size: 1.05rem; line-height: 1.8; }
+    .note {
+      border-left: 3px solid var(--accent-2);
+      padding: 0.7rem 0.95rem;
+      margin: 1.1rem 0;
+      background: rgba(167, 139, 250, 0.08);
+      border-radius: 0 10px 10px 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    .note strong { color: var(--text); }
+    .note-warn { border-left-color: var(--warn); background: rgba(251, 191, 36, 0.08); }
+    .math-steps {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .math-steps li {
+      padding: 0.65rem 0.85rem;
+      margin: 0.5rem 0;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+    .math-steps .step-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+    .step-list {
+      counter-reset: step;
+      list-style: none;
+      padding-left: 0;
+    }
+    .step-list li {
+      counter-increment: step;
+      position: relative;
+      padding-left: 2.2rem;
+      margin: 0.65rem 0;
+    }
+    .step-list li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0.1rem;
+      width: 1.55rem;
+      height: 1.55rem;
+      border-radius: 50%;
+      background: rgba(56, 189, 248, 0.2);
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      color: #7dd3fc;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+    }
+    .readout {
+      font-variant-numeric: tabular-nums;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
+    }
+    .split-caption {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 0.35rem;
+    }
+    @media (max-width: 520px) { .split-caption { grid-template-columns: 1fr; } }
+    footer {
+      margin-top: 2.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    code {
+      font-family: Consolas, "Segoe UI Mono", monospace;
+      font-size: 0.88em;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="page-brand">
+      <div class="page-brand-inner">
+        <img src="header-logo.png" alt="Hal AI by CJF" class="brand-logo" decoding="async" />
+        <img src="apple-touch-icon.png" alt="" width="180" height="180" class="brand-icon-apple" decoding="async" />
+      </div>
+    </header>
+
+    <h1>Quantum waves and where to find an electron</h1>
+    <p class="subtitle">From water ripples to quantum probability — with moving diagrams, named symbols, and step-by-step mathematics.</p>
+
+    <aside class="sym-index" id="symbols" aria-labelledby="sym-heading">
+      <h2 id="sym-heading">Symbol index</h2>
+      <p style="margin-top:0;font-size:0.92rem;color:var(--muted)">The first time each symbol appears in the text it is introduced by name. Use this table as a quick reference.</p>
+      <table class="sym-table">
+        <thead>
+          <tr><th>Symbol</th><th>Name</th><th>Meaning (short)</th></tr>
+        </thead>
+        <tbody>
+          <tr id="sym-psi"><td class="glyph"><a href="#sym-psi">ψ</a></td><td>psi</td><td>Wave function — contains amplitude and phase</td></tr>
+          <tr id="sym-lambda"><td class="glyph"><a href="#sym-lambda">λ</a></td><td>lambda</td><td>Wavelength (distance between repeats)</td></tr>
+          <tr id="sym-k"><td class="glyph"><a href="#sym-k">k</a></td><td>wave number</td><td><span class="math">k = 2π/λ</span> — radians of phase per metre</td></tr>
+          <tr id="sym-omega"><td class="glyph"><a href="#sym-omega">ω</a></td><td>omega</td><td>Angular frequency — radians per second</td></tr>
+          <tr id="sym-phi"><td class="glyph"><a href="#sym-phi">φ</a></td><td>phi</td><td>Phase shift of a wave</td></tr>
+          <tr id="sym-h"><td class="glyph"><a href="#sym-h">h</a></td><td>Planck constant</td><td>Quantum of action; <span class="math">h ≈ 6.63×10⁻³⁴ J·s</span></td></tr>
+          <tr id="sym-hbar"><td class="glyph"><a href="#sym-hbar">ℏ</a></td><td>h-bar</td><td>Reduced Planck constant <span class="math">ℏ = h/(2π)</span></td></tr>
+          <tr id="sym-p"><td class="glyph"><a href="#sym-p">p</a></td><td>momentum</td><td>Mass × velocity (kg·m/s in SI)</td></tr>
+          <tr id="sym-H"><td class="glyph"><a href="#sym-H">Ĥ</a></td><td>H-hat</td><td>Hamiltonian operator (total energy recipe)</td></tr>
+        </tbody>
+      </table>
+    </aside>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>On this page</h2>
+      <ol>
+        <li><a href="#start">How to use this guide</a></li>
+        <li><a href="#classical">Classical waves first</a></li>
+        <li><a href="#duality">Wave–particle duality</a></li>
+        <li><a href="#water-slits">Water waves: one slit and two</a></li>
+        <li><a href="#slits">Double-slit experiment</a></li>
+        <li><a href="#feynman">Feynman: sum over paths</a></li>
+        <li><a href="#matter-waves">Matter waves</a></li>
+        <li><a href="#psi">The wave function</a></li>
+        <li><a href="#born">Born’s rule &amp; probability density</a></li>
+        <li><a href="#box">Particle in a box</a></li>
+        <li><a href="#schrodinger">Schrödinger equation</a></li>
+        <li><a href="#symbols">Symbol index</a></li>
+      </ol>
+    </nav>
+
+    <section id="start">
+      <h2>How to use this guide</h2>
+      <p>You do not need to be a professional physicist. If you have met sines, basic algebra, and the idea that light can behave as a wave, you are in the right place. We build intuition with moving pictures first, then connect each picture to the equations.</p>
+      <p><strong>Central idea:</strong> for a quantum particle such as an electron, we do not predict a single definite position. We predict how likely it is to be found at each place. That information is encoded in a <strong>wave function</strong>
+        <span class="math"><a class="sym-ref" href="#sym-psi" id="first-psi">ψ</a></span>
+        <dfn class="sym-name">(psi)</dfn> — and from ψ we obtain probabilities using <strong>Born’s rule</strong> (see <a href="#born">section 8</a>).
+      </p>
+    </section>
+
+    <section id="classical">
+      <h2>1. Classical waves first</h2>
+      <p>Before electrons, get comfortable with a plain travelling wave. Along a line, height <span class="math">y</span> at position <span class="math">x</span> and time <span class="math">t</span> can be written:</p>
+      <div class="eq-block" role="math">
+        <span class="label">Travelling wave</span>
+        <span class="math">y(x, t) = A sin(kx − ωt + φ)</span>
+      </div>
+      <ul>
+        <li><span class="math">A</span> — <strong>amplitude</strong> (how tall the wave is)</li>
+        <li><span class="math"><a class="sym-ref" href="#sym-k" id="first-k">k</a></span> <dfn class="sym-name">(wave number)</dfn> — how rapidly the pattern repeats in space; related to <span class="math"><a class="sym-ref" href="#sym-lambda" id="first-lambda">λ</a></span> <dfn class="sym-name">(lambda, wavelength)</dfn> by <span class="math">λ = 2π/k</span></li>
+        <li><span class="math"><a class="sym-ref" href="#sym-omega" id="first-omega">ω</a></span> <dfn class="sym-name">(omega, angular frequency)</dfn> — how fast the pattern oscillates in time</li>
+        <li><span class="math"><a class="sym-ref" href="#sym-phi" id="first-phi">φ</a></span> <dfn class="sym-name">(phi, phase)</dfn> — slides the pattern left or right</li>
+      </ul>
+      <p>When two waves meet, they <strong>superpose</strong>: at each point you <em>add</em> their displacements. Crest on crest → bigger crest; crest on trough → cancellation. That is the mechanism behind interference fringes.</p>
+
+      <div class="diagram-wrap">
+        <p class="demo-label">Interactive — one wave or two superposed</p>
+        <canvas id="waveCanvas" width="720" height="220" aria-label="Animated sine waves"></canvas>
+        <div class="controls">
+          <div class="control-group">
+            <label for="waveMode">Mode</label>
+            <select id="waveMode">
+              <option value="one">Single wave</option>
+              <option value="two">Two waves (interference)</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="waveAmp">Amplitude A</label>
+            <input type="range" id="waveAmp" min="0.2" max="1" step="0.05" value="0.75" />
+          </div>
+          <div class="control-group">
+            <label for="waveK">Wave number k</label>
+            <input type="range" id="waveK" min="0.8" max="3.5" step="0.1" value="1.6" />
+          </div>
+          <div class="control-group">
+            <label for="wavePhase">Phase φ (wave 2)</label>
+            <input type="range" id="wavePhase" min="0" max="6.28" step="0.05" value="1.57" />
+          </div>
+          <div class="control-group">
+            <label>&nbsp;</label>
+            <button type="button" id="wavePause" class="primary">Pause</button>
+          </div>
+        </div>
+        <p class="readout" id="waveReadout"></p>
+        <div class="legend">
+          <span><span class="swatch" style="background:#38bdf8"></span> Wave 1</span>
+          <span><span class="swatch" style="background:#a78bfa"></span> Wave 2</span>
+          <span><span class="swatch" style="background:#34d399"></span> Sum (superposition)</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="duality">
+      <h2>2. Wave–particle duality</h2>
+      <p>Light and matter both show wave-like and particle-like behaviour — but not as a simple “sometimes a ball, sometimes a ripple” in the same measurement.</p>
+      <ul>
+        <li><strong>Particle-like:</strong> light arrives in discrete packets (photons); electrons hit a detector one at a time as dots.</li>
+        <li><strong>Wave-like:</strong> light and electrons produce interference and diffraction — patterns that require adding wave amplitudes.</li>
+      </ul>
+      <p>The punchline: a single electron is not a tiny ball that secretly goes through only one slit. Its quantum description can include contributions associated with many paths; those contributions combine (interfere) before we turn them into a probability of where the dot appears.</p>
+    </section>
+
+    <section id="water-slits">
+      <h2>3. Water waves: one slit, then two</h2>
+      <p>Nothing teaches interference like ripples on water. A vibrating source sends circular waves. A barrier with a slit acts as a new source (Huygens’ principle: every point on a wavefront can spawn outgoing ripples). With <strong>one</strong> slit you see a spreading fan — diffraction. With <strong>two</strong> slits, ripples from each slit overlap: where crests align the water is higher (a <strong>bright</strong> fringe). Where crest meets trough the displacements <strong>cancel</strong> — the waves add to almost zero. Those <strong>dark</strong> fringes are therefore very <strong>slim</strong> lines (complete cancellation), not wide bands like the bright regions.</p>
+
+      <div class="diagram-wrap">
+        <p class="demo-label">Top-down ripple tank — compare one slit vs two</p>
+        <div class="mode-tabs" role="tablist">
+          <button type="button" data-water-mode="1" class="active">One slit (diffraction)</button>
+          <button type="button" data-water-mode="2">Two slits (interference)</button>
+        </div>
+        <canvas id="waterCanvas" width="720" height="300" aria-label="Water wave interference simulation"></canvas>
+        <canvas id="waterProfileCanvas" width="720" height="72" aria-label="Wave height along centre line" style="margin-top:0.35rem"></canvas>
+        <div class="controls">
+          <div class="control-group">
+            <label for="waterTime">Animation speed</label>
+            <input type="range" id="waterTime" min="0.4" max="4" step="0.1" value="1" />
+          </div>
+          <div class="control-group">
+            <label for="waterGuide">Fringe guide</label>
+            <select id="waterGuide">
+              <option value="on" selected>On (two slits)</option>
+              <option value="off">Off</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label>&nbsp;</label>
+            <button type="button" id="waterPause" class="primary">Pause</button>
+          </div>
+          <div class="control-group">
+            <label>&nbsp;</label>
+            <button type="button" id="waterReset">Reset</button>
+          </div>
+        </div>
+        <p class="readout" id="waterReadout">Circular ripples leave the dipper (left), pass through the slit(s), and overlap to the right. The lower trace shows height along the centre line.</p>
+        <div class="legend">
+          <span><span class="swatch" style="background:#67e8f9"></span> Crest</span>
+          <span><span class="swatch" style="background:#0c4a6e"></span> Trough / cancelled (slim)</span>
+          <span><span class="swatch" style="background:#34d399"></span> Bright fringes (time average)</span>
+        </div>
+      </div>
+
+      <h3>Reading the view</h3>
+      <p>The tank shows <strong>moving</strong> ripples (crests and troughs). The green wash is a <strong>time average</strong> — it builds where waves keep reinforcing, so stripe spacing stays steady even while rings move. With two slits, the <strong>wide green bands</strong> are constructive interference (crest on crest). The <strong>narrow dark gaps</strong> between them are destructive: the two wave trains cancel almost completely, so little water moves there and the band looks thin. Compare those slim dark lines to the lower graph. Quantum electrons follow the same addition logic, but we add <a class="sym-ref" href="#sym-psi">ψ</a>, not water height.</p>
+    </section>
+
+    <section id="slits">
+      <h2>4. The double-slit experiment</h2>
+      <p>Send particles through two narrow slits onto a screen. Three famous outcomes:</p>
+      <ol class="step-list">
+        <li><strong>Classical particles</strong> (bullets): two clusters — one behind each slit.</li>
+        <li><strong>Classical waves</strong> (water, radio): many fringes from interference.</li>
+        <li><strong>Quantum objects</strong> (photons, electrons): dots arrive one by one, yet over time they fill in the <em>wave</em> fringe pattern.</li>
+      </ol>
+
+      <div class="diagram-wrap">
+        <p class="demo-label">Ripple intensity at the screen (two slits)</p>
+        <canvas id="fringeCanvas" width="720" height="200" aria-label="Interference fringe intensity pattern"></canvas>
+        <p class="readout" id="fringeReadout">Bright fringes where path difference from the two slits differs by whole wavelengths.</p>
+      </div>
+
+      <div class="diagram-wrap">
+        <p class="demo-label">Detection screen — particles vs waves vs quantum</p>
+        <div class="mode-tabs" role="tablist" aria-label="Double slit mode">
+          <button type="button" data-slit-mode="particles" class="active" role="tab" aria-selected="true">Classical particles</button>
+          <button type="button" data-slit-mode="waves" role="tab">Classical waves</button>
+          <button type="button" data-slit-mode="quantum" role="tab">Quantum (one at a time)</button>
+        </div>
+        <canvas id="slitCanvas" width="720" height="280" aria-label="Double slit simulation"></canvas>
+        <div class="controls">
+          <div class="control-group">
+            <label for="slitSep">Slit separation</label>
+            <input type="range" id="slitSep" min="28" max="80" value="48" />
+          </div>
+          <div class="control-group">
+            <label for="slitLambda">Wavelength <a class="sym-ref" href="#sym-lambda">λ</a></label>
+            <input type="range" id="slitLambda" min="6" max="24" value="14" />
+          </div>
+          <div class="control-group">
+            <label>&nbsp;</label>
+            <button type="button" id="slitReset" class="primary">Reset screen</button>
+          </div>
+        </div>
+        <p class="readout" id="slitReadout">Classical particles: two clusters, no fringes.</p>
+      </div>
+    </section>
+
+    <section id="feynman">
+      <h2>5. Feynman: sum over paths</h2>
+      <p>Richard Feynman offered a vivid way to think about the double slit: a photon or electron does not travel a single classical path. In the quantum calculation we (conceptually) allow <strong>every possible path</strong> from source to screen — straight, wiggly, via either slit, and everything in between. Each path carries a little <strong>probability amplitude</strong> (a complex number with a phase). The observed probability is built from the <em>sum</em> of all those contributions.</p>
+      <p>Paths that differ slightly in length pick up slightly different phases. Where many paths add in phase, detection is likely; where they swirl out of phase, they cancel. That reproduces the same fringes as wave interference — without insisting the particle “went both ways” as a classical object.</p>
+
+      <div class="diagram-wrap">
+        <p class="demo-label">Animated — sample of possible paths; colour = phase</p>
+        <canvas id="pathCanvas" width="720" height="300" aria-label="Feynman paths animation"></canvas>
+        <div class="controls">
+          <div class="control-group">
+            <label for="pathCount">Paths shown</label>
+            <input type="range" id="pathCount" min="8" max="48" step="4" value="24" />
+          </div>
+          <div class="control-group">
+            <label for="pathSpeed">Animation</label>
+            <input type="range" id="pathSpeed" min="0" max="2" step="1" value="1" />
+          </div>
+          <div class="control-group">
+            <label>&nbsp;</label>
+            <button type="button" id="pathHighlight" class="primary">Highlight one path</button>
+          </div>
+        </div>
+        <p class="readout" id="pathReadout">Many paths contribute; no single path is “the” trajectory before detection.</p>
+        <div class="eq-block">
+          <span class="label">Path-integral idea (schematic)</span>
+          <span class="math">amplitude to arrive ≈ Σ (over paths) e<sup>iS/ℏ</sup></span>
+        </div>
+        <p style="font-size:0.92rem;color:var(--muted);margin-top:0.5rem"><span class="math">S</span> is the classical action along a path; <a class="sym-ref" href="#sym-hbar" id="first-hbar">ℏ</a> <dfn class="sym-name">(h-bar)</dfn> sets the scale on which phase differences matter. You do not need to evaluate the sum for this guide — the picture is what matters.</p>
+      </div>
+    </section>
+
+    <section id="matter-waves">
+      <h2>6. Matter waves (de Broglie)</h2>
+      <p>If a particle has momentum <span class="math"><a class="sym-ref" href="#sym-p" id="first-p">p</a></span>, Louis de Broglie associated a wavelength:</p>
+      <div class="eq-block">
+        <span class="label">de Broglie</span>
+        <span class="math">λ = h / p</span>
+      </div>
+      <p>Here <span class="math"><a class="sym-ref" href="#sym-h" id="first-h">h</a></span> <dfn class="sym-name">(Planck constant)</dfn> is the same constant that links photon energy to frequency. Because <span class="math">h</span> is tiny, everyday objects have wavelengths too short to show interference. Slow electrons have <span class="math">λ</span> comparable to atomic scales — that is when wave effects dominate.</p>
+      <div class="note note-warn">
+        <strong>Units matter.</strong> Use <span class="math">p</span> in kg·m/s before substituting into <span class="math">λ = h/p</span>.
+      </div>
+    </section>
+
+    <section id="psi">
+      <h2>7. The wave function <a class="sym-ref" href="#sym-psi">ψ</a></h2>
+      <p>For one particle in one dimension, the state is described by <span class="math">ψ(x, t)</span>. It is generally <strong>complex</strong>: each point has a magnitude and a phase. Think of <a class="sym-ref" href="#sym-psi">ψ</a> as the recipe for how contributions combine — not as something you see directly on a meter.</p>
+      <p>Detectors show counts (dots, clicks). The link between <a class="sym-ref" href="#sym-psi">ψ</a> and those counts is Born’s rule — next section.</p>
+
+      <div class="diagram-wrap">
+        <canvas id="psiPartsCanvas" width="720" height="200" aria-label="Real and imaginary parts of psi"></canvas>
+        <div class="legend">
+          <span><span class="swatch" style="background:#38bdf8"></span> Re(<a class="sym-ref" href="#sym-psi">ψ</a>)</span>
+          <span><span class="swatch" style="background:#f472b6"></span> Im(<a class="sym-ref" href="#sym-psi">ψ</a>)</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="born">
+      <h2>8. Born’s rule and probability density</h2>
+
+      <h3>Probability vs probability density</h3>
+      <p>These words sound alike but mean different things:</p>
+      <ul>
+        <li><strong>Probability</strong> is a number between 0 and 1 for a whole event (“found between here and here”).</li>
+        <li><strong>Probability density</strong> <span class="math">|ψ(x)|²</span> tells you how densely probability is spread along the axis — like mass density tells you how mass is spread in space.</li>
+      </ul>
+      <p>To obtain a probability for a small interval, multiply density by width:</p>
+      <div class="eq-block">
+        <span class="label">Probability in a tiny strip</span>
+        <span class="math">P(x in [x₀, x₀ + Δx]) ≈ |ψ(x₀)|² · Δx</span> &nbsp; (when Δx is small)
+      </div>
+      <p>For the whole line, the total must be 100%:</p>
+      <div class="eq-block">
+        <span class="label">Normalisation</span>
+        <span class="math">∫ |ψ(x)|² dx = 1</span>
+      </div>
+      <p>The integral adds up infinitely many thin strips — exactly the idea shown in the animation below.</p>
+
+      <div class="diagram-wrap">
+        <p class="demo-label">Drag the window — see |ψ|² × Δx as a probability sliver</p>
+        <canvas id="densityCanvas" width="720" height="240" aria-label="Probability density interactive"></canvas>
+        <div class="controls">
+          <div class="control-group">
+            <label for="densityX">Window centre x</label>
+            <input type="range" id="densityX" min="0" max="100" value="50" />
+          </div>
+          <div class="control-group">
+            <label for="densityWidth">Window width Δx</label>
+            <input type="range" id="densityWidth" min="2" max="20" value="8" />
+          </div>
+          <div class="control-group">
+            <label>&nbsp;</label>
+            <button type="button" id="densityShoot" class="primary">Simulate 200 detections</button>
+          </div>
+        </div>
+        <p class="readout" id="densityReadout"></p>
+      </div>
+
+      <h3>Born’s rule</h3>
+      <p>Max Born proposed: the probability density for position is the squared magnitude of the wave function:</p>
+      <div class="eq-block">
+        <span class="label">Born rule (1D)</span>
+        <span class="math">ρ(x) = |ψ(x)|²</span>
+      </div>
+
+      <h3>Why we add amplitudes before squaring</h3>
+      <p>Suppose two slits contribute <span class="math">ψ₁</span> and <span class="math">ψ₂</span> at some point on the screen. The total amplitude is <span class="math">ψ = ψ₁ + ψ₂</span>. The probability density uses the <em>combined</em> amplitude:</p>
+      <ul class="math-steps">
+        <li>
+          <div class="step-title">Step 1 — add amplitudes</div>
+          <span class="math">ψ = ψ₁ + ψ₂</span>
+        </li>
+        <li>
+          <div class="step-title">Step 2 — square magnitude</div>
+          <span class="math">|ψ|² = |ψ₁ + ψ₂|²</span>
+        </li>
+        <li>
+          <div class="step-title">Step 3 — expand (real &amp; imaginary parts, or “length times length”)</div>
+          <span class="math">|ψ₁ + ψ₂|² = |ψ₁|² + |ψ₂|² + 2 Re(ψ₁* ψ₂)</span>
+        </li>
+      </ul>
+      <p>The last term <span class="math">2 Re(ψ₁* ψ₂)</span> is the <strong>interference term</strong>. It can be positive (bright fringe) or negative (dark fringe — near-complete cancellation, hence a slim band). Without it, you would only get two overlapping blobs — never the full pattern.</p>
+
+      <div class="diagram-wrap">
+        <p class="demo-label">Compare |ψ₁|² + |ψ₂|² vs |ψ₁ + ψ₂|²</p>
+        <canvas id="bornCanvas" width="720" height="260" aria-label="Born rule interference comparison"></canvas>
+        <div class="controls">
+          <div class="control-group">
+            <label for="bornPhase">Phase between ψ₁ and ψ₂</label>
+            <input type="range" id="bornPhase" min="0" max="6.28" step="0.05" value="0" />
+          </div>
+        </div>
+        <p class="readout" id="bornReadout"></p>
+        <div class="legend">
+          <span><span class="swatch" style="background:#64748b"></span> |ψ₁|² + |ψ₂|² (no interference)</span>
+          <span><span class="swatch" style="background:#34d399"></span> |ψ₁ + ψ₂|² (quantum)</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="box">
+      <h2>9. Particle in a box</h2>
+      <p>A particle between walls at <span class="math">x = 0</span> and <span class="math">x = L</span> has standing-wave solutions with integer <span class="math">n = 1, 2, 3, …</span>:</p>
+      <div class="eq-block">
+        <span class="label">Energy level n</span>
+        <span class="math">ψₙ(x) = √(2/L) sin(nπx / L)</span>
+      </div>
+      <p>Then <span class="math">|ψₙ|²</span> is the probability density. For <span class="math">n = 1</span> the electron is most likely near the centre; for <span class="math">n = 2</span> there are two favoured regions and zero probability at the centre (a <strong>node</strong>).</p>
+
+      <div class="diagram-wrap">
+        <p class="demo-label">Infinite square well</p>
+        <canvas id="boxCanvas" width="720" height="260" aria-label="Particle in a box"></canvas>
+        <div class="controls">
+          <div class="control-group">
+            <label for="boxN">Quantum number n</label>
+            <input type="range" id="boxN" min="1" max="6" step="1" value="1" />
+          </div>
+          <div class="control-group">
+            <label for="boxAnimate">Animate <a class="sym-ref" href="#sym-psi">ψ</a> in time</label>
+            <select id="boxAnimate">
+              <option value="on">On</option>
+              <option value="off">Off</option>
+            </select>
+          </div>
+        </div>
+        <p class="readout" id="boxReadout"></p>
+        <div class="legend">
+          <span><span class="swatch" style="background:#c4b5fd"></span> ψₙ (real part)</span>
+          <span><span class="swatch" style="background:#34d399"></span> |ψₙ|²</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="schrodinger">
+      <h2>10. Schrödinger equation (gentle)</h2>
+      <p><a class="sym-ref" href="#sym-psi">ψ</a> is found by solving the Schrödinger equation. In one dimension:</p>
+      <div class="eq-block">
+        <span class="label">Time-dependent</span>
+        <span class="math">iℏ ∂ψ/∂t = Ĥψ</span>
+      </div>
+      <p>Here <span class="math"><a class="sym-ref" href="#sym-hbar">ℏ</a></span> and <span class="math"><a class="sym-ref" href="#sym-H" id="first-H">Ĥ</a></span> <dfn class="sym-name">(H-hat, Hamiltonian)</dfn> encode how kinetic and potential energy shape the evolution. For a definite energy <span class="math">E</span>, write <span class="math">ψ(x,t) = ψ(x) e^{-iEt/ℏ}</span> to obtain:</p>
+      <div class="eq-block">
+        <span class="label">Time-independent</span>
+        <span class="math">Ĥψ = Eψ</span>
+      </div>
+      <p>The particle-in-a-box example is a simple solution of <span class="math">Ĥψ = Eψ</span>. Hydrogen is richer — but the workflow is identical: solve for <a class="sym-ref" href="#sym-psi">ψ</a>, then read probabilities from <span class="math">|ψ|²</span>.</p>
+    </section>
+
+    <footer>
+      <p>Prepared for <strong>CJF Hal AI</strong>. Symbol index at <a href="#symbols">top of page</a>. Regenerate icons with <code>python build_icons.py</code>.</p>
+    </footer>
+  </main>
+
+  <script>
+(function () {
+  "use strict";
+
+  /* ========== Wave line demo ========== */
+  const waveCanvas = document.getElementById("waveCanvas");
+  const wctx = waveCanvas.getContext("2d");
+  let wavePaused = false, waveT = 0;
+
+  function drawWaveDemo() {
+    const W = waveCanvas.width, H = waveCanvas.height;
+    const mode = document.getElementById("waveMode").value;
+    const A = +document.getElementById("waveAmp").value;
+    const k = +document.getElementById("waveK").value;
+    const phi = +document.getElementById("wavePhase").value;
+    const omega = 2.2;
+    wctx.fillStyle = "#0e152c";
+    wctx.fillRect(0, 0, W, H);
+    wctx.strokeStyle = "rgba(148,163,184,0.15)";
+    wctx.beginPath();
+    wctx.moveTo(0, H / 2);
+    wctx.lineTo(W, H / 2);
+    wctx.stroke();
+    const mid = H * 0.52, scale = H * 0.32;
+    const y1 = (x) => A * Math.sin(k * (x / 55) - omega * waveT);
+    const y2 = (x) => A * Math.sin(k * (x / 55) - omega * waveT + phi);
+    function plot(fn, color, width) {
+      wctx.strokeStyle = color;
+      wctx.lineWidth = width;
+      wctx.beginPath();
+      for (let px = 0; px <= W; px += 2) {
+        const y = mid - fn(px) * scale;
+        if (px === 0) wctx.moveTo(px, y);
+        else wctx.lineTo(px, y);
+      }
+      wctx.stroke();
+    }
+    plot(y1, "#38bdf8", 2.5);
+    if (mode === "two") {
+      plot(y2, "#a78bfa", 2);
+      plot((x) => y1(x) + y2(x), "#34d399", 2.5);
+    }
+    document.getElementById("waveReadout").textContent =
+      mode === "one"
+        ? `Single wave: A=${A.toFixed(2)}, k=${k.toFixed(1)}`
+        : `φ≈${phi.toFixed(2)} rad: try π (${Math.PI.toFixed(2)}) for cancellation, 0 for reinforcement.`;
+  }
+  document.getElementById("wavePause").addEventListener("click", function () {
+    wavePaused = !wavePaused;
+    this.textContent = wavePaused ? "Play" : "Pause";
+  });
+  ["waveMode", "waveAmp", "waveK", "wavePhase"].forEach((id) =>
+    document.getElementById(id).addEventListener("input", drawWaveDemo)
+  );
+  (function waveLoop() {
+    if (!wavePaused) waveT += 0.04;
+    drawWaveDemo();
+    requestAnimationFrame(waveLoop);
+  })();
+
+  /* ========== Water ripple tank — Huygens model (illustrative) ========== */
+  const waterCanvas = document.getElementById("waterCanvas");
+  const waterProfileCanvas = document.getElementById("waterProfileCanvas");
+  const w2 = waterCanvas.getContext("2d");
+  const wProf = waterProfileCanvas.getContext("2d");
+
+  const WC = 270;
+  const WR = 112;
+  const WALL_X = 98;
+  const SRC = { x: 22, y: WR / 2 };
+  const K = 0.82;
+  const OMEGA = 0.13;
+  const SLIT_HALF = 4;
+  const SLIT_GAP = 17;
+  const WAVE_AMP = 1.35;
+
+  let waterPaused = false;
+  let waterSlits = 1;
+  let waterT = 0;
+  const waterMeanSq = new Float32Array(WC * WR);
+  const waterField = new Float32Array(WC * WR);
+  const waterImg = w2.createImageData(waterCanvas.width, waterCanvas.height);
+  const wIdx = (x, y) => x + y * WC;
+
+  function slitEmitters(slits) {
+    const cy = WR / 2;
+    const list = [];
+    if (slits === 1) {
+      for (let yi = -SLIT_HALF; yi <= SLIT_HALF; yi++) {
+        list.push({ x: WALL_X, y: cy + yi, phase: 0 });
+      }
+    } else {
+      for (const c of [cy - SLIT_GAP, cy + SLIT_GAP]) {
+        for (let yi = -SLIT_HALF; yi <= SLIT_HALF; yi++) {
+          list.push({ x: WALL_X, y: c + yi, phase: 0 });
+        }
+      }
+    }
+    return list;
+  }
+
+  let emitters = slitEmitters(1);
+
+  function waveAt(x, y, t) {
+    let h = 0;
+    if (x < WALL_X - 2) {
+      const r0 = Math.hypot(x - SRC.x, y - SRC.y);
+      h += WAVE_AMP * Math.sin(K * r0 - OMEGA * t) / Math.sqrt(r0 * 0.15 + 1);
+    }
+    if (x > WALL_X + 2) {
+      for (const e of emitters) {
+        const r = Math.hypot(x - e.x, y - e.y);
+        if (r < 2) continue;
+        h += WAVE_AMP * Math.sin(K * r - OMEGA * t + e.phase) / Math.sqrt(r * 0.14 + 0.85);
+      }
+    }
+    return h;
+  }
+
+  function isBarrier(x, y, slits) {
+    if (x < WALL_X - 1 || x > WALL_X + 1) return false;
+    const cy = WR / 2;
+    const inSlit = (y0, y1) => y >= y0 && y <= y1;
+    if (slits === 1) {
+      return !inSlit(cy - SLIT_HALF, cy + SLIT_HALF);
+    }
+    return !(
+      inSlit(cy - SLIT_GAP - SLIT_HALF, cy - SLIT_GAP + SLIT_HALF) ||
+      inSlit(cy + SLIT_GAP - SLIT_HALF, cy + SLIT_GAP + SLIT_HALF)
+    );
+  }
+
+  /** Slit openings in simulation y-coordinates */
+  function getSlitBands(slits) {
+    const cy = WR / 2;
+    if (slits === 1) {
+      return [{ y0: cy - SLIT_HALF, y1: cy + SLIT_HALF, label: "slit" }];
+    }
+    return [
+      { y0: cy - SLIT_GAP - SLIT_HALF, y1: cy - SLIT_GAP + SLIT_HALF, label: "slit 1" },
+      { y0: cy + SLIT_GAP - SLIT_HALF, y1: cy + SLIT_GAP + SLIT_HALF, label: "slit 2" },
+    ];
+  }
+
+  function drawWaterBarrierOverlay(wallPx, dispH) {
+    const wallW = 12;
+    const x0 = wallPx - wallW / 2;
+    const scaleY = dispH / WR;
+    const bands = getSlitBands(waterSlits).map((b) => ({
+      y0: b.y0 * scaleY,
+      y1: b.y1 * scaleY,
+      label: b.label,
+    }));
+
+    w2.fillStyle = "#1e293b";
+    w2.strokeStyle = "#475569";
+    w2.lineWidth = 1;
+    let lastY = 0;
+    for (const band of bands) {
+      const topH = band.y0 - lastY;
+      if (topH > 0) {
+        w2.fillRect(x0, lastY, wallW, topH);
+        w2.strokeRect(x0 + 0.5, lastY + 0.5, wallW - 1, topH - 1);
+      }
+      lastY = band.y1;
+    }
+    if (lastY < dispH) {
+      w2.fillRect(x0, lastY, wallW, dispH - lastY);
+      w2.strokeRect(x0 + 0.5, lastY + 0.5, wallW - 1, dispH - lastY - 1);
+    }
+
+    for (const band of bands) {
+      const h = band.y1 - band.y0;
+      w2.fillStyle = "rgba(103, 232, 249, 0.14)";
+      w2.fillRect(x0 + 1, band.y0 + 1, wallW - 2, h - 2);
+      w2.strokeStyle = "rgba(103, 232, 249, 0.95)";
+      w2.lineWidth = 2.5;
+      w2.strokeRect(x0 - 1, band.y0 - 1, wallW + 2, h + 2);
+      w2.strokeStyle = "rgba(186, 230, 253, 0.55)";
+      w2.lineWidth = 1;
+      w2.strokeRect(x0 + 2, band.y0 + 2, wallW - 4, h - 4);
+      w2.fillStyle = "rgba(241, 245, 249, 0.92)";
+      w2.font = "600 10px Segoe UI, system-ui, sans-serif";
+      w2.fillText(band.label, x0 + wallW + 5, band.y0 + h / 2 + 3);
+    }
+  }
+
+  function resetWaterTank() {
+    waterMeanSq.fill(0);
+    waterT = 0;
+  }
+
+  function waterCaption() {
+    return waterSlits === 1
+      ? "One slit: incoming rings (left) pass the opening and spread in a semicircle. Green shows where waves keep adding."
+      : "Two slits: wide green bands = crests adding; slim dark gaps = waves cancelled out. Match spacing to the graph below.";
+  }
+
+  resetWaterTank();
+  document.getElementById("waterReadout").textContent = waterCaption();
+
+  document.querySelectorAll("[data-water-mode]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("[data-water-mode]").forEach((b) => b.classList.toggle("active", b === btn));
+      waterSlits = +btn.dataset.waterMode;
+      emitters = slitEmitters(waterSlits);
+      resetWaterTank();
+      document.getElementById("waterReadout").textContent = waterCaption();
+    });
+  });
+  document.getElementById("waterPause").addEventListener("click", function () {
+    waterPaused = !waterPaused;
+    this.textContent = waterPaused ? "Play" : "Pause";
+  });
+  document.getElementById("waterReset").addEventListener("click", () => {
+    resetWaterTank();
+    document.getElementById("waterReadout").textContent = waterCaption();
+  });
+
+  function heightToRgb(h) {
+    const n = Math.max(-1, Math.min(1, h * 0.95));
+    if (n >= 0) {
+      return [
+        Math.round(8 + 30 * n),
+        Math.round(70 + 150 * n),
+        Math.round(110 + 145 * n),
+      ];
+    }
+    const t = -n;
+    return [
+      Math.round(4 + 6 * (1 - t)),
+      Math.round(18 + 28 * (1 - t)),
+      Math.round(40 + 50 * (1 - t)),
+    ];
+  }
+
+  function updateWaterField(t) {
+    const fade = waterSlits === 2 ? 0.94 : 0.96;
+    for (let y = 0; y < WR; y++) {
+      for (let x = 0; x < WC; x++) {
+        const i = wIdx(x, y);
+        if (isBarrier(x, y, waterSlits)) {
+          waterField[i] = 0;
+          continue;
+        }
+        const h = waveAt(x, y, t);
+        waterField[i] = h;
+        if (x > WALL_X + 3) {
+          waterMeanSq[i] = fade * waterMeanSq[i] + (1 - fade) * h * h;
+        } else {
+          waterMeanSq[i] *= fade;
+        }
+      }
+    }
+  }
+
+  function drawWater() {
+    const dispW = waterCanvas.width;
+    const dispH = waterCanvas.height;
+    const d = waterImg.data;
+    let maxMs = 0.001;
+    for (let y = 0; y < WR; y++) {
+      for (let x = WALL_X + 4; x < WC; x++) {
+        if (!isBarrier(x, y, waterSlits)) {
+          maxMs = Math.max(maxMs, waterMeanSq[wIdx(x, y)]);
+        }
+      }
+    }
+    const showGuide =
+      waterSlits === 2 && document.getElementById("waterGuide").value === "on";
+
+    for (let py = 0; py < dispH; py++) {
+      const sy = Math.min(WR - 1, ((py / dispH) * WR) | 0);
+      for (let px = 0; px < dispW; px++) {
+        const sx = Math.min(WC - 1, ((px / dispW) * WC) | 0);
+        const i = wIdx(sx, sy);
+        let r, g, b;
+        if (isBarrier(sx, sy, waterSlits)) {
+          r = 52; g = 62; b = 82;
+        } else {
+          [r, g, b] = heightToRgb(waterField[i]);
+          if (sx > WALL_X + 4 && waterSlits === 2) {
+            const ms = waterMeanSq[i] / maxMs;
+            const fringe = Math.pow(ms, 0.45);
+            r = Math.min(255, r * (1 - fringe * 0.35) + fringe * 30);
+            g = Math.min(255, g * (1 - fringe * 0.25) + fringe * 130);
+            b = Math.min(255, b * (1 - fringe * 0.35) + fringe * 55);
+          } else if (sx > WALL_X + 4 && waterSlits === 1) {
+            const ms = waterMeanSq[i] / maxMs;
+            const fringe = Math.pow(ms, 0.5) * 0.45;
+            g = Math.min(255, g + fringe * 70);
+          }
+        }
+        const p = (py * dispW + px) * 4;
+        d[p] = r;
+        d[p + 1] = g;
+        d[p + 2] = b;
+        d[p + 3] = 255;
+      }
+    }
+    w2.putImageData(waterImg, 0, 0);
+
+    const wallPx = (WALL_X / WC) * dispW;
+    drawWaterBarrierOverlay(wallPx, dispH);
+
+    const cyPx = dispH / 2;
+    w2.strokeStyle = "rgba(148, 163, 184, 0.35)";
+    w2.lineWidth = 1;
+    w2.beginPath();
+    w2.moveTo(0, cyPx);
+    w2.lineTo(dispW, cyPx);
+    w2.stroke();
+
+    w2.fillStyle = "rgba(241, 245, 249, 0.95)";
+    w2.font = "600 11px Segoe UI, system-ui, sans-serif";
+    w2.fillText("dipper", 8, cyPx - 8);
+    w2.fillText("barrier", wallPx + 8, 14);
+    w2.fillText("interference", wallPx + 28, dispH - 10);
+
+    if (showGuide) {
+      const lamPx = ((2 * Math.PI) / K / WC) * dispW;
+      for (let n = -3; n <= 3; n++) {
+        const fx = wallPx + lamPx * (1.1 + n * 0.92);
+        if (fx < wallPx + 20 || fx > dispW - 12) continue;
+        w2.fillStyle = n % 2 === 0 ? "rgba(52,211,153,0.5)" : "rgba(248,113,113,0.35)";
+        w2.fillRect(fx - 2, dispH * 0.12, 4, dispH * 0.76);
+      }
+      w2.fillStyle = "rgba(52, 211, 153, 0.9)";
+      w2.font = "10px Segoe UI, sans-serif";
+      w2.fillText("bright (wide)", wallPx + lamPx * 1.05, 26);
+      w2.fillStyle = "rgba(248, 113, 113, 0.9)";
+      w2.fillText("cancelled (slim)", wallPx + lamPx * 1.95, 26);
+    }
+
+    drawWaterProfile();
+  }
+
+  function drawWaterProfile() {
+    const W = waterProfileCanvas.width;
+    const H = waterProfileCanvas.height;
+    const midY = (WR / 2) | 0;
+    wProf.fillStyle = "#0a1024";
+    wProf.fillRect(0, 0, W, H);
+    const wallPx = (WALL_X / WC) * W;
+    const samples = W;
+    const line = new Float32Array(samples);
+    const env = new Float32Array(samples);
+    let maxA = 0.01;
+    let maxE = 0.001;
+    for (let px = 0; px < samples; px++) {
+      const sx = (px / W) * WC;
+      const ix = Math.min(WC - 1, sx | 0);
+      line[px] = waveAt(sx, midY, waterT);
+      env[px] = waterMeanSq[wIdx(ix, midY)];
+      maxA = Math.max(maxA, Math.abs(line[px]));
+      maxE = Math.max(maxE, env[px]);
+    }
+    if (waterSlits === 2 && maxE > 0) {
+      wProf.beginPath();
+      for (let px = wallPx + 4; px < samples; px++) {
+        const h = (env[px] / maxE) * (H * 0.42);
+        const y = H - 6 - h;
+        if (px === wallPx + 4) wProf.moveTo(px, y);
+        else wProf.lineTo(px, y);
+      }
+      wProf.lineTo(samples - 1, H - 6);
+      wProf.lineTo(wallPx + 4, H - 6);
+      wProf.closePath();
+      wProf.fillStyle = "rgba(52, 211, 153, 0.22)";
+      wProf.fill();
+    }
+    wProf.beginPath();
+    for (let px = 0; px < samples; px++) {
+      const y = H / 2 - (line[px] / maxA) * (H * 0.36);
+      if (px === 0) wProf.moveTo(px, y);
+      else wProf.lineTo(px, y);
+    }
+    wProf.strokeStyle = "#67e8f9";
+    wProf.lineWidth = 2;
+    wProf.stroke();
+    const scaleY = H / WR;
+    const bands = getSlitBands(waterSlits).map((b) => ({
+      y0: b.y0 * scaleY,
+      y1: b.y1 * scaleY,
+    }));
+    wProf.fillStyle = "#334155";
+    let lastY = 0;
+    for (const band of bands) {
+      if (band.y0 > lastY) wProf.fillRect(wallPx - 3, lastY, 6, band.y0 - lastY);
+      lastY = band.y1;
+    }
+    if (lastY < H) wProf.fillRect(wallPx - 3, lastY, 6, H - lastY);
+    for (const band of bands) {
+      wProf.strokeStyle = "rgba(103, 232, 249, 0.7)";
+      wProf.lineWidth = 1.5;
+      wProf.strokeRect(wallPx - 4, band.y0, 8, band.y1 - band.y0);
+    }
+    wProf.fillStyle = "rgba(148,163,184,0.85)";
+    wProf.font = "10px Segoe UI,sans-serif";
+    wProf.fillText(
+      waterSlits === 2
+        ? "Cyan = wave height now · green fill = fringe strength (average)"
+        : "Wave height along centre line ← distance →",
+      8,
+      12
+    );
+  }
+
+  (function waterLoop() {
+    if (!waterPaused) {
+      const spd = +document.getElementById("waterTime").value;
+      waterT += OMEGA * spd * 2.1;
+      updateWaterField(waterT);
+    }
+    drawWater();
+    requestAnimationFrame(waterLoop);
+  })();
+
+  /* ========== Fringe preview ========== */
+  const fringeCanvas = document.getElementById("fringeCanvas");
+  const fctx = fringeCanvas.getContext("2d");
+  function drawFringe() {
+    const W = fringeCanvas.width, H = fringeCanvas.height;
+    const sep = +document.getElementById("slitSep").value;
+    const lam = +document.getElementById("slitLambda").value;
+    fctx.fillStyle = "#0e152c";
+    fctx.fillRect(0, 0, W, H);
+    fctx.beginPath();
+    for (let x = 40; x < W - 20; x++) {
+      const theta = (x - W / 2) * 0.012;
+      const phase = (Math.PI * sep * Math.sin(theta)) / lam;
+      const I = Math.cos(phase) ** 2;
+      const y = H - 30 - I * (H - 50);
+      if (x === 40) fctx.moveTo(x, y);
+      else fctx.lineTo(x, y);
+    }
+    const grad = fctx.createLinearGradient(0, 0, 0, H);
+    grad.addColorStop(0, "rgba(167,139,250,0.9)");
+    grad.addColorStop(1, "rgba(56,189,248,0.5)");
+    fctx.strokeStyle = grad;
+    fctx.lineWidth = 2;
+    fctx.stroke();
+    fctx.fillStyle = "rgba(52,211,153,0.25)";
+    fctx.lineTo(W - 20, H - 20);
+    fctx.lineTo(40, H - 20);
+    fctx.closePath();
+    fctx.fill();
+    fctx.fillStyle = "#9aa8c8";
+    fctx.font = "11px Segoe UI,sans-serif";
+    fctx.fillText("screen intensity ∝ cos²(π d sinθ / λ)", 40, 18);
+  }
+  setInterval(drawFringe, 200);
+  document.getElementById("slitSep").addEventListener("input", drawFringe);
+  document.getElementById("slitLambda").addEventListener("input", drawFringe);
+
+  /* ========== Double slit screen ========== */
+  const slitCanvas = document.getElementById("slitCanvas");
+  const sctx = slitCanvas.getContext("2d");
+  let slitMode = "particles";
+  const hits = new Uint16Array(slitCanvas.width);
+
+  document.querySelectorAll("[data-slit-mode]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("[data-slit-mode]").forEach((b) => {
+        b.classList.toggle("active", b === btn);
+        b.setAttribute("aria-selected", b === btn ? "true" : "false");
+      });
+      slitMode = btn.dataset.slitMode;
+      resetSlit();
+      updateSlitCaption();
+    });
+  });
+
+  function resetSlit() {
+    hits.fill(0);
+    drawSlitFrame();
+  }
+
+  function updateSlitCaption() {
+    const cap = {
+      particles: "Classical particles: two clusters, no fringes.",
+      waves: "Classical waves: smooth intensity curve (also shown on fringe diagram above).",
+      quantum: "Quantum: one dot at a time — histogram matches wave interference.",
+    };
+    document.getElementById("slitReadout").textContent = cap[slitMode];
+  }
+
+  function slitIntensity(x) {
+    const sep = +document.getElementById("slitSep").value;
+    const lam = +document.getElementById("slitLambda").value;
+    const screenX = slitCanvas.width * 0.72;
+    const phase = ((x - screenX) * sep) / (lam * 8);
+    const amp = Math.cos(phase) + Math.cos(phase + 0.3);
+    return amp * amp;
+  }
+
+  function addHit(x) {
+    const i = Math.max(0, Math.min(hits.length - 1, Math.round(x)));
+    hits[i] = Math.min(65530, hits[i] + 1);
+  }
+
+  function drawSlitFrame() {
+    const W = slitCanvas.width, H = slitCanvas.height;
+    sctx.fillStyle = "#0e152c";
+    sctx.fillRect(0, 0, W, H);
+    const wallX = 95, screenX = W * 0.72, sep = +document.getElementById("slitSep").value, yMid = H / 2;
+    sctx.fillStyle = "#1e293b";
+    sctx.fillRect(wallX - 8, 20, 16, H - 40);
+    sctx.clearRect(wallX - 4, yMid - sep / 2 - 10, 8, 18);
+    sctx.clearRect(wallX - 4, yMid + sep / 2 - 8, 8, 18);
+    sctx.fillStyle = "rgba(148,163,184,0.35)";
+    sctx.fillRect(screenX, 24, 6, H - 48);
+    const maxHit = Math.max(1, ...hits);
+    for (let x = Math.floor(screenX); x < W - 4; x++) {
+      const v = hits[x] / maxHit;
+      if (v <= 0) continue;
+      const h = v * (H - 50);
+      sctx.fillStyle = slitMode === "quantum"
+        ? `rgba(52,211,153,${0.15 + 0.85 * v})`
+        : `rgba(56,189,248,${0.2 + 0.75 * v})`;
+      sctx.fillRect(x, H - 24 - h, 2, h);
+    }
+    if (slitMode === "waves") {
+      sctx.beginPath();
+      for (let x = screenX; x < W - 8; x++) {
+        const I = slitIntensity(x);
+        const y = H - 28 - I * 42;
+        if (x === screenX) sctx.moveTo(x, y);
+        else sctx.lineTo(x, y);
+      }
+      sctx.strokeStyle = "rgba(167,139,250,0.85)";
+      sctx.lineWidth = 2;
+      sctx.stroke();
+    }
+    sctx.fillStyle = "#9aa8c8";
+    sctx.font = "11px Segoe UI,sans-serif";
+    sctx.fillText("source", 18, yMid + 4);
+    sctx.fillText("slits", wallX - 14, 14);
+    sctx.fillText("screen", screenX - 8, 16);
+  }
+
+  function slitStep() {
+    const screenX = slitCanvas.width * 0.72;
+    const sep = +document.getElementById("slitSep").value;
+    if (slitMode === "particles") {
+      for (let n = 0; n < 3; n++) {
+        const cluster = Math.random() < 0.5 ? -sep * 0.55 : sep * 0.55;
+        addHit(screenX + cluster + (Math.random() - 0.5) * 22);
+      }
+    } else if (slitMode === "quantum") {
+      const xs = [];
+      let total = 0;
+      for (let x = screenX; x < slitCanvas.width - 10; x += 2) {
+        const w = slitIntensity(x) + 0.02;
+        xs.push(x);
+        total += w;
+      }
+      let r = Math.random() * total;
+      for (let i = 0; i < xs.length; i++) {
+        r -= slitIntensity(xs[i]) + 0.02;
+        if (r <= 0) { addHit(xs[i]); break; }
+      }
+    }
+    drawSlitFrame();
+    requestAnimationFrame(slitStep);
+  }
+  document.getElementById("slitReset").addEventListener("click", resetSlit);
+  ["slitSep", "slitLambda"].forEach((id) =>
+    document.getElementById(id).addEventListener("input", resetSlit)
+  );
+  updateSlitCaption();
+  slitStep();
+
+  /* ========== Feynman paths ========== */
+  const pathCanvas = document.getElementById("pathCanvas");
+  const pctx = pathCanvas.getContext("2d");
+  let pathT = 0, pathHighlight = false, pathHighlightIdx = 0;
+
+  function drawPaths() {
+    const W = pathCanvas.width, H = pathCanvas.height;
+    const nPaths = +document.getElementById("pathCount").value;
+    const anim = +document.getElementById("pathSpeed").value;
+    pctx.fillStyle = "#0e152c";
+    pctx.fillRect(0, 0, W, H);
+    const x0 = 50, x1 = W - 60, y0 = H / 2, wallX = 200;
+    pctx.fillStyle = "#334155";
+    pctx.fillRect(wallX - 5, 30, 10, H - 60);
+    pctx.clearRect(wallX - 6, H * 0.38, 12, H * 0.1);
+    pctx.clearRect(wallX - 6, H * 0.52, 12, H * 0.1);
+    pctx.fillStyle = "rgba(148,163,184,0.4)";
+    pctx.fillRect(W - 45, 35, 8, H - 70);
+    pctx.fillStyle = "#9aa8c8";
+    pctx.font = "11px Segoe UI,sans-serif";
+    pctx.fillText("source", x0 - 30, y0);
+    pctx.fillText("slits", wallX - 12, 22);
+    pctx.fillText("screen", W - 52, 22);
+
+    for (let i = 0; i < nPaths; i++) {
+      const viaTop = i % 2 === 0;
+      const ySlit = viaTop ? H * 0.42 : H * 0.58;
+      const yEnd = 50 + (H - 100) * ((i * 0.618) % 1);
+      const cp1x = wallX + 40 + 30 * Math.sin(pathT + i);
+      const cp1y = ySlit + 40 * Math.cos(pathT * 0.7 + i * 0.5);
+      const cp2x = W - 120;
+      const cp2y = yEnd - 30 * Math.sin(i);
+      const len = Math.hypot(x1 - x0, yEnd - y0) + Math.hypot(wallX - x0, ySlit - y0);
+      const phase = (len * 0.08 + pathT * 2) % (2 * Math.PI);
+      const hue = 190 + (phase / (2 * Math.PI)) * 80;
+      const alpha = pathHighlight && i !== pathHighlightIdx ? 0.12 : 0.55;
+      pctx.strokeStyle = `hsla(${hue}, 85%, 65%, ${alpha})`;
+      pctx.lineWidth = pathHighlight && i === pathHighlightIdx ? 2.8 : 1.2;
+      pctx.beginPath();
+      pctx.moveTo(x0, y0);
+      pctx.quadraticCurveTo(cp1x, cp1y, wallX, ySlit);
+      pctx.quadraticCurveTo(cp2x, cp2y, x1, yEnd);
+      pctx.stroke();
+    }
+    if (anim) pathT += 0.03;
+  }
+  document.getElementById("pathHighlight").addEventListener("click", () => {
+    pathHighlight = !pathHighlight;
+    pathHighlightIdx = Math.floor(Math.random() * +document.getElementById("pathCount").value);
+    document.getElementById("pathReadout").textContent = pathHighlight
+      ? "One path alone is not the whole story — all paths contribute to the amplitude."
+      : "Many paths contribute; detection uses the combined amplitude.";
+  });
+  ["pathCount", "pathSpeed"].forEach((id) =>
+    document.getElementById(id).addEventListener("input", () => {})
+  );
+  (function pathLoop() {
+    drawPaths();
+    requestAnimationFrame(pathLoop);
+  })();
+
+  /* ========== ψ parts animation ========== */
+  const psiCanvas = document.getElementById("psiPartsCanvas");
+  const psictx = psiCanvas.getContext("2d");
+  let psiT = 0;
+  (function psiLoop() {
+    const W = psiCanvas.width, H = psiCanvas.height;
+    psictx.fillStyle = "#0e152c";
+    psictx.fillRect(0, 0, W, H);
+    psictx.beginPath();
+    for (let x = 0; x <= W; x += 2) {
+      const u = x / W;
+      const re = Math.cos(3 * Math.PI * u - psiT) * Math.exp(-4 * (u - 0.5) ** 2);
+      const y = H * 0.45 - re * 55;
+      if (x === 0) psictx.moveTo(x, y);
+      else psictx.lineTo(x, y);
+    }
+    psictx.strokeStyle = "#38bdf8";
+    psictx.lineWidth = 2;
+    psictx.stroke();
+    psictx.beginPath();
+    for (let x = 0; x <= W; x += 2) {
+      const u = x / W;
+      const im = Math.sin(3 * Math.PI * u - psiT) * Math.exp(-4 * (u - 0.5) ** 2);
+      const y = H * 0.72 - im * 45;
+      if (x === 0) psictx.moveTo(x, y);
+      else psictx.lineTo(x, y);
+    }
+    psictx.strokeStyle = "#f472b6";
+    psictx.setLineDash([6, 4]);
+    psictx.stroke();
+    psictx.setLineDash([]);
+    psictx.fillStyle = "#9aa8c8";
+    psictx.font = "12px Segoe UI,sans-serif";
+    psictx.fillText("Snapshot of ψ — Re and Im oscillate; |ψ|² is what predicts detections.", 40, 20);
+    psiT += 0.04;
+    requestAnimationFrame(psiLoop);
+  })();
+
+  /* ========== Probability density ========== */
+  const densityCanvas = document.getElementById("densityCanvas");
+  const dctx = densityCanvas.getContext("2d");
+  const densityHist = new Uint16Array(100);
+  function psiGauss(u) {
+    return Math.exp(-((u - 0.5) ** 2) / (2 * 0.12 ** 2));
+  }
+  function drawDensity() {
+    const W = densityCanvas.width, H = densityCanvas.height;
+    const cx = +document.getElementById("densityX").value;
+    const dw = +document.getElementById("densityWidth").value;
+    dctx.fillStyle = "#0e152c";
+    dctx.fillRect(0, 0, W, H);
+    const pad = 40, plotW = W - 2 * pad;
+    dctx.beginPath();
+    let maxP = 0;
+    const probs = [];
+    for (let i = 0; i <= plotW; i++) {
+      const u = i / plotW;
+      const psi = psiGauss(u);
+      const p = psi * psi;
+      probs.push(p);
+      maxP = Math.max(maxP, p);
+      const y = H - 50 - (p / 3.2) * (H - 80);
+      if (i === 0) dctx.moveTo(pad + i, y);
+      else dctx.lineTo(pad + i, y);
+    }
+    dctx.strokeStyle = "#34d399";
+    dctx.lineWidth = 2;
+    dctx.stroke();
+    dctx.fillStyle = "rgba(52,211,153,0.2)";
+    dctx.lineTo(pad + plotW, H - 40);
+    dctx.lineTo(pad, H - 40);
+    dctx.closePath();
+    dctx.fill();
+    const u0 = cx / 100;
+    const x0 = pad + (cx / 100) * plotW;
+    const xw = (dw / 100) * plotW;
+    const p0 = psiGauss(u0) ** 2;
+    const approxP = p0 * (dw / 100);
+    dctx.fillStyle = "rgba(251,191,36,0.35)";
+    dctx.fillRect(x0 - xw / 2, H - 50 - (p0 / 3.2) * (H - 80), xw, (H - 50) - (H - 50 - (p0 / 3.2) * (H - 80)));
+    dctx.strokeStyle = "#fbbf24";
+    dctx.strokeRect(x0 - xw / 2, H - 50 - (p0 / 3.2) * (H - 80), xw, (H - 50) - (H - 50 - (p0 / 3.2) * (H - 80)));
+    const maxH = Math.max(1, ...densityHist);
+    for (let b = 0; b < 100; b++) {
+      const h = (densityHist[b] / maxH) * 36;
+      dctx.fillStyle = "rgba(56,189,248,0.5)";
+      dctx.fillRect(pad + (b / 100) * plotW, H - 38 - h, plotW / 100 - 1, h);
+    }
+    document.getElementById("densityReadout").textContent =
+      `At centre x≈${u0.toFixed(2)}: |ψ|²≈${p0.toFixed(3)}. Strip width Δx≈${(dw / 100).toFixed(2)} → P≈|ψ|²Δx≈${approxP.toFixed(3)} (${(approxP * 100).toFixed(1)}% if normalised over full line).`;
+    dctx.fillStyle = "#9aa8c8";
+    dctx.font = "11px Segoe UI,sans-serif";
+    dctx.fillText("|ψ|²", pad - 5, 30);
+    dctx.fillText("histogram of simulated hits", pad, H - 8);
+  }
+  ["densityX", "densityWidth"].forEach((id) =>
+    document.getElementById(id).addEventListener("input", drawDensity)
+  );
+  document.getElementById("densityShoot").addEventListener("click", () => {
+    densityHist.fill(0);
+    const weights = [];
+    let total = 0;
+    for (let b = 0; b < 100; b++) {
+      const w = psiGauss(b / 100) ** 2 + 0.001;
+      weights.push(w);
+      total += w;
+    }
+    for (let n = 0; n < 200; n++) {
+      let r = Math.random() * total;
+      for (let b = 0; b < 100; b++) {
+        r -= weights[b];
+        if (r <= 0) { densityHist[b]++; break; }
+      }
+    }
+    drawDensity();
+  });
+  drawDensity();
+
+  /* ========== Born comparison ========== */
+  const bornCanvas = document.getElementById("bornCanvas");
+  const bctx2 = bornCanvas.getContext("2d");
+  function drawBorn() {
+    const W = bornCanvas.width, H = bornCanvas.height;
+    const phase = +document.getElementById("bornPhase").value;
+    bctx2.fillStyle = "#0e152c";
+    bctx2.fillRect(0, 0, W, H);
+    const mid = H * 0.5;
+    let maxI = 0;
+    const noInt = [], withInt = [];
+    for (let x = 0; x < W; x++) {
+      const u = x / W;
+      const a1 = Math.exp(-((u - 0.38) ** 2) / 0.008);
+      const a2 = Math.exp(-((u - 0.62) ** 2) / 0.008);
+      const psi1 = a1;
+      const psi2 = a2 * Math.cos(phase);
+      const pNo = a1 * a1 + a2 * a2;
+      const sum = psi1 + psi2;
+      const pYes = sum * sum;
+      noInt.push(pNo);
+      withInt.push(pYes);
+      maxI = Math.max(maxI, pNo, pYes);
+    }
+    for (let x = 0; x < W; x++) {
+      const yNo = mid + 20 - (noInt[x] / maxI) * 70;
+      const yYes = mid - 20 - (withInt[x] / maxI) * 70;
+      bctx2.fillStyle = "rgba(100,116,139,0.35)";
+      bctx2.fillRect(x, yNo, 2, mid + 20 - yNo);
+      bctx2.fillStyle = "rgba(52,211,153,0.45)";
+      bctx2.fillRect(x, yYes, 2, mid - 20 - yYes);
+    }
+    document.getElementById("bornReadout").textContent =
+      phase < 0.2 || phase > 5.9
+        ? "Phase ≈ 0: paths in phase → bright fringes (central peak enhanced)."
+        : phase > 2.9 && phase < 3.4
+          ? "Phase ≈ π: destructive interference → dip between slits."
+          : "Adjust phase to see fringes appear and disappear in |ψ₁+ψ₂|² only.";
+    bctx2.fillStyle = "#9aa8c8";
+    bctx2.font = "11px Segoe UI,sans-serif";
+    bctx2.fillText("upper: |ψ₁+ψ₂|²   lower: |ψ₁|²+|ψ₂|²", 40, 18);
+  }
+  document.getElementById("bornPhase").addEventListener("input", drawBorn);
+  drawBorn();
+
+  /* ========== Particle in box ========== */
+  const boxCanvas = document.getElementById("boxCanvas");
+  const bctx = boxCanvas.getContext("2d");
+  let boxPhase = 0;
+  function drawBox() {
+    const W = boxCanvas.width, H = boxCanvas.height;
+    const n = +document.getElementById("boxN").value;
+    const animate = document.getElementById("boxAnimate").value === "on";
+    const L = W - 80, x0 = 40;
+    bctx.fillStyle = "#0e152c";
+    bctx.fillRect(0, 0, W, H);
+    bctx.strokeStyle = "rgba(148,163,184,0.25)";
+    bctx.lineWidth = 2;
+    bctx.strokeRect(x0, 36, L, H - 72);
+    const t = animate ? boxPhase : 0;
+    const E = (n * n * Math.PI * Math.PI) / 2;
+    bctx.beginPath();
+    for (let i = 0; i <= L; i += 2) {
+      const xi = i / L;
+      const psi = Math.sqrt(2) * Math.sin(n * Math.PI * xi) * Math.cos(E * t);
+      const y = H * 0.42 - psi * 38;
+      if (i === 0) bctx.moveTo(x0 + i, y);
+      else bctx.lineTo(x0 + i, y);
+    }
+    bctx.strokeStyle = "#c4b5fd";
+    bctx.lineWidth = 2;
+    bctx.stroke();
+    bctx.beginPath();
+    for (let i = 0; i <= L; i += 2) {
+      const xi = i / L;
+      const prob = 2 * Math.sin(n * Math.PI * xi) ** 2;
+      const y = H * 0.78 - prob * 55;
+      if (i === 0) bctx.moveTo(x0 + i, y);
+      else bctx.lineTo(x0 + i, y);
+    }
+    bctx.fillStyle = "rgba(52,211,153,0.35)";
+    bctx.lineTo(x0 + L, H - 36);
+    bctx.lineTo(x0, H - 36);
+    bctx.closePath();
+    bctx.fill();
+    bctx.strokeStyle = "#34d399";
+    bctx.stroke();
+    document.getElementById("boxReadout").textContent =
+      `n=${n}: ${n} half-wavelength(s) in the box; |ψ|² has ${n} peak region(s).`;
+    if (animate) boxPhase += 0.05;
+  }
+  ["boxN", "boxAnimate"].forEach((id) =>
+    document.getElementById(id).addEventListener("input", drawBox)
+  );
+  (function boxLoop() {
+    drawBox();
+    requestAnimationFrame(boxLoop);
+  })();
+})();
+  </script>
+</body>
+</html>
