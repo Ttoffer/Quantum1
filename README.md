@@ -5,7 +5,7 @@ This folder contains a **single static web page**, `index.html`, that explains *
 ## What the page covers
 
 - **Symbol index** — Greek symbols (e.g. **ψ** psi, **λ** lambda, **ℏ** h-bar) are named on first use and listed in a table at the top.
-- **Classical waves** — travelling sine waves and **superposition** (interactive).
+- **Classical waves** — travelling-wave equation step by step, **phase φ** (sine vs cosine, interactive + unit circle), worked examples, travelling-wave animation, and **superposition** (interactive).
 - **Wave–particle duality** — particle-like detections vs wave-like interference.
 - **Water-wave ripple tank** — top-down **Huygens** model: one slit (diffraction fan) and two slits (interference). **Wide green bands** = constructive interference; **slim dark gaps** = near-complete **cancellation** (crest meets trough). Centre-line **profile graph** and optional **fringe guide**.
 - **Double-slit experiment** — classical particles, classical waves, and quantum buildup (interactive screen histogram).
@@ -38,7 +38,7 @@ Open `index.html` in any modern web browser, or publish the folder on **GitHub P
 | File | Purpose |
 |------|---------|
 | `index.html` | Full guide and interactive demos (GitHub Pages entry) |
-| `header-logo.png` | Hal AI by CJF branding (from `Branding/CJF Hal AI/`) |
+| `header-logo.svg` | Standard Hal AI by CJF header logo (canonical copy from `Branding/CJF Hal AI/`) |
 | `favicon.svg` | Browser tab icon (ψ motif) |
 | `apple-touch-icon.png` | **180×180** — home-screen tile and header companion icon |
 | `build_icons.py` | Regenerate `favicon.svg` and `apple-touch-icon.png` |

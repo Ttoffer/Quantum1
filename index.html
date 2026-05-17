@@ -345,7 +345,7 @@
   <main>
     <header class="page-brand">
       <div class="page-brand-inner">
-        <img src="header-logo.png" alt="Hal AI by CJF" class="brand-logo" decoding="async" />
+        <img src="header-logo.svg" alt="Hal AI by CJF" class="brand-logo" width="320" height="88" decoding="async" />
         <img src="apple-touch-icon.png" alt="" width="180" height="180" class="brand-icon-apple" decoding="async" />
       </div>
     </header>
@@ -379,6 +379,8 @@
       <ol>
         <li><a href="#start">How to use this guide</a></li>
         <li><a href="#classical">Classical waves first</a></li>
+        <li><a href="#phase">Phase φ explained</a></li>
+        <li><a href="#travel-wave">Travelling wave maths</a></li>
         <li><a href="#duality">Wave–particle duality</a></li>
         <li><a href="#water-slits">Water waves: one slit and two</a></li>
         <li><a href="#slits">Double-slit experiment</a></li>
@@ -412,9 +414,102 @@
         <li><span class="math">A</span> — <strong>amplitude</strong> (how tall the wave is)</li>
         <li><span class="math"><a class="sym-ref" href="#sym-k" id="first-k">k</a></span> <dfn class="sym-name">(wave number)</dfn> — how rapidly the pattern repeats in space; related to <span class="math"><a class="sym-ref" href="#sym-lambda" id="first-lambda">λ</a></span> <dfn class="sym-name">(lambda, wavelength)</dfn> by <span class="math">λ = 2π/k</span></li>
         <li><span class="math"><a class="sym-ref" href="#sym-omega" id="first-omega">ω</a></span> <dfn class="sym-name">(omega, angular frequency)</dfn> — how fast the pattern oscillates in time</li>
-        <li><span class="math"><a class="sym-ref" href="#sym-phi" id="first-phi">φ</a></span> <dfn class="sym-name">(phi, phase)</dfn> — slides the pattern left or right</li>
+        <li><span class="math"><a class="sym-ref" href="#sym-phi" id="first-phi">φ</a></span> <dfn class="sym-name">(phi, phase)</dfn> — see <a href="#phase">below</a>; how the wave is lined up in space and time</li>
       </ul>
-      <p>When two waves meet, they <strong>superpose</strong>: at each point you <em>add</em> their displacements. Crest on crest → bigger crest; crest on trough → cancellation. That is the mechanism behind interference fringes.</p>
+
+      <h3 id="travel-wave">The equation in plain language</h3>
+      <p>The formula only looks intimidating because the symbols are unfamiliar. Each piece is one idea:</p>
+      <ol class="math-steps">
+        <li>
+          <div class="step-title">① <span class="math">A</span> — amplitude</div>
+          How tall the wave is. <span class="math">A = 0.75</span> means crests reach 0.75 above the middle line.
+        </li>
+        <li>
+          <div class="step-title">② <span class="math">sin( … )</span> — the repeating shape</div>
+          The sine curve repeats every <span class="math">2π</span> radians in its input. Whatever we put inside the brackets is the <strong>phase angle</strong> at that <span class="math">x</span> and <span class="math">t</span>.
+        </li>
+        <li>
+          <div class="step-title">③ <span class="math">kx</span> — ripples along the line</div>
+          As <span class="math">x</span> increases, the pattern repeats in space. Large <span class="math">k</span> → short wavelength <span class="math">λ = 2π/k</span>.
+        </li>
+        <li>
+          <div class="step-title">④ <span class="math">−ωt</span> — the pattern moves</div>
+          As <span class="math">t</span> increases, <span class="math">−ωt</span> shifts the shape along <span class="math">+x</span> (wave travelling to the right).
+        </li>
+        <li>
+          <div class="step-title">⑤ <span class="math">+ φ</span> — phase (offset)</div>
+          A constant added inside the sine. It slides the whole pattern along <span class="math">x</span>, or at one point sets where you are on the cycle.
+        </li>
+      </ol>
+      <p>So the full argument is <span class="math">(kx − ωt + φ)</span> = (position) + (time) + (offset). Take the sine of that number to get <span class="math">y</span>.</p>
+
+      <h3 id="phase">What is <span class="math">φ</span> (phase)?</h3>
+      <p>At a fixed position — take <span class="math">x = 0</span> — the height is</p>
+      <div class="eq-block">
+        <span class="math">y(0, t) = A sin(−ωt + φ)</span>
+      </div>
+      <p>At <span class="math">t = 0</span> that is <span class="math">y(0, 0) = A sin(φ)</span>. So <span class="math">φ</span> tells you <strong>where on the cycle the point starts</strong> on the vertical axis:</p>
+      <ul>
+        <li><span class="math">φ = 0</span> → <span class="math">sin(0) = 0</span> (sine-like: zero height, rising) — like standard <span class="math">sin</span></li>
+        <li><span class="math">φ = π/2</span> → <span class="math">sin(π/2) = 1</span> (at the top) — like <span class="math">cos</span> at the origin</li>
+        <li><span class="math">φ = π</span> → zero again but falling; <span class="math">φ = 3π/2</span> → at the bottom</li>
+      </ul>
+      <p>More generally, <span class="math">φ</span> is an <strong>offset in the cycle</strong>. Two waves with the same <span class="math">A</span>, <span class="math">k</span>, and <span class="math">ω</span> but different <span class="math">φ</span> are the same shape shifted sideways — or, at one place on the rope, offset on the <span class="math">y</span>-axis by a fraction of a cycle. That offset is what matters for interference.</p>
+
+      <div class="diagram-wrap">
+        <p class="demo-label">Phase at one instant (<span class="math">t = 0</span>) — drag <span class="math">φ</span> or try sine / cosine presets</p>
+        <canvas id="phaseCanvas" width="720" height="260" aria-label="Phase offset and sine versus cosine"></canvas>
+        <div class="controls">
+          <div class="control-group">
+            <label for="phasePhi">Phase φ (radians)</label>
+            <input type="range" id="phasePhi" min="0" max="6.28" step="0.02" value="0" />
+          </div>
+          <div class="control-group">
+            <label>&nbsp;</label>
+            <button type="button" data-phase-preset="0" class="primary">φ = 0 (sine)</button>
+          </div>
+          <div class="control-group">
+            <label>&nbsp;</label>
+            <button type="button" data-phase-preset="1.5708">φ = π/2 (cosine)</button>
+          </div>
+          <div class="control-group">
+            <label>&nbsp;</label>
+            <button type="button" data-phase-preset="3.1416">φ = π</button>
+          </div>
+        </div>
+        <p class="readout" id="phaseReadout"></p>
+        <div class="legend">
+          <span><span class="swatch" style="background:#38bdf8"></span> <span class="math">y = sin(kx + φ)</span> at <span class="math">t=0</span></span>
+          <span><span class="swatch" style="background:#fbbf24"></span> Point at <span class="math">x = 0</span></span>
+        </div>
+      </div>
+
+      <h3>Worked examples (travelling wave)</h3>
+      <p>Take <span class="math">A = 1</span>, <span class="math">k = 1.6</span>, <span class="math">ω = 2.2</span> (same scale as the animations). Use <span class="math">y(x,t) = A sin(kx − ωt + φ)</span>.</p>
+      <ul class="math-steps">
+        <li>
+          <div class="step-title">Example A — height at the origin, right now</div>
+          <span class="math">x = 0</span>, <span class="math">t = 0</span>, <span class="math">φ = 0</span>: <span class="math">y = sin(0) = 0</span> (on the midline, going up).<br />
+          Same place with <span class="math">φ = π/2</span>: <span class="math">y = sin(π/2) = 1</span> (crest at the origin).
+        </li>
+        <li>
+          <div class="step-title">Example B — a crest elsewhere, frozen in time</div>
+          <span class="math">t = 0</span>, <span class="math">φ = 0</span>. A crest needs <span class="math">kx = π/2</span>, so <span class="math">x = (π/2)/k ≈ 0.98</span> → <span class="math">y = 1</span>.
+        </li>
+        <li>
+          <div class="step-title">Example C — why it “travels”</div>
+          Crest where <span class="math">kx − ωt + φ = π/2</span>. So <span class="math">x = (π/2 − φ + ωt)/k</span>. As <span class="math">t</span> grows, <span class="math">x</span> grows → crest moves right. Speed ≈ <span class="math">ω/k</span>.
+        </li>
+      </ul>
+
+      <div class="diagram-wrap">
+        <p class="demo-label">Travelling wave — watch the crest move; yellow dot tracks one place on the rope</p>
+        <canvas id="travelCanvas" width="720" height="200" aria-label="Travelling wave animation"></canvas>
+        <p class="readout" id="travelReadout"></p>
+      </div>
+
+      <h3>Superposition — two waves</h3>
+      <p>When two waves meet, they <strong>superpose</strong>: at each point you <em>add</em> their displacements. Crest on crest → bigger crest; crest on trough → cancellation. The phase slider on wave 2 sets the <strong>phase difference</strong> between them — that is what drives interference fringes.</p>
 
       <div class="diagram-wrap">
         <p class="demo-label">Interactive — one wave or two superposed</p>
@@ -746,6 +841,183 @@
   <script>
 (function () {
   "use strict";
+
+  /* ========== Phase φ demo (snapshot t = 0) ========== */
+  const phaseCanvas = document.getElementById("phaseCanvas");
+  const phaseCtx = phaseCanvas ? phaseCanvas.getContext("2d") : null;
+  const PHASE_K = 1.6;
+
+  function drawPhaseDemo() {
+    if (!phaseCtx || !phaseCanvas) return;
+    const W = phaseCanvas.width;
+    const H = phaseCanvas.height;
+    const phiEl = document.getElementById("phasePhi");
+    const phi = phiEl ? +phiEl.value : 0;
+    const waveH = H * 0.4;
+    const midY = H * 0.45;
+    const xScale = 48;
+    const originX = 56;
+    const plotW = W * 0.55;
+    const circleCx = W * 0.78;
+    const circleCy = H * 0.45;
+    const circleR = H * 0.26;
+    const ctx = phaseCtx;
+
+    ctx.fillStyle = "#0e152c";
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.strokeStyle = "rgba(148,163,184,0.25)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(originX, midY);
+    ctx.lineTo(originX + plotW, midY);
+    ctx.stroke();
+
+    ctx.strokeStyle = "#38bdf8";
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    for (let px = 0; px <= plotW; px += 2) {
+      const x = px / xScale;
+      const sx = originX + px;
+      const y = midY - Math.sin(PHASE_K * x + phi) * waveH;
+      if (px === 0) ctx.moveTo(sx, y);
+      else ctx.lineTo(sx, y);
+    }
+    ctx.stroke();
+
+    const y0 = midY - Math.sin(phi) * waveH;
+    ctx.fillStyle = "#fbbf24";
+    ctx.beginPath();
+    ctx.arc(originX, y0, 8, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = "rgba(251,191,36,0.6)";
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(originX, midY);
+    ctx.lineTo(originX, y0);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.strokeStyle = "rgba(148,163,184,0.4)";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(circleCx, circleCy, circleR, 0, Math.PI * 2);
+    ctx.stroke();
+    const ax = circleCx + circleR * Math.cos(phi - Math.PI / 2);
+    const ay = circleCy + circleR * Math.sin(phi - Math.PI / 2);
+    ctx.strokeStyle = "#a78bfa";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(circleCx, circleCy);
+    ctx.lineTo(ax, ay);
+    ctx.stroke();
+    ctx.fillStyle = "#a78bfa";
+    ctx.beginPath();
+    ctx.arc(ax, ay, 5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = "#38bdf8";
+    ctx.beginPath();
+    ctx.moveTo(ax, ay);
+    ctx.lineTo(ax, circleCy);
+    ctx.stroke();
+
+    ctx.fillStyle = "#9aa8c8";
+    ctx.font = "11px Segoe UI, system-ui, sans-serif";
+    ctx.fillText("y", 8, midY - waveH - 8);
+    ctx.fillText("x", originX + plotW - 12, midY + 20);
+    ctx.fillText("angle φ", circleCx - 22, circleCy - circleR - 10);
+    ctx.fillText("y(0,0) = sin(φ)", originX + 10, Math.min(H - 8, y0 + (y0 < midY ? -14 : 18)));
+
+    const deg = ((phi * 180) / Math.PI).toFixed(0);
+    const yVal = Math.sin(phi).toFixed(2);
+    let name = "an intermediate point on the cycle";
+    if (Math.abs(phi) < 0.15) name = "equivalent to sine at the origin (zero, rising)";
+    else if (Math.abs(phi - Math.PI / 2) < 0.15) name = "equivalent to cosine at the origin (maximum height)";
+    else if (Math.abs(phi - Math.PI) < 0.15) name = "zero displacement, falling";
+    const readout = document.getElementById("phaseReadout");
+    if (readout) {
+      readout.textContent =
+        `φ = ${phi.toFixed(2)} rad (${deg}°); sin(φ) = ${yVal}. At x = 0, t = 0: ${name}.`;
+    }
+  }
+
+  if (phaseCanvas && phaseCtx) {
+    const phasePhi = document.getElementById("phasePhi");
+    if (phasePhi) phasePhi.addEventListener("input", drawPhaseDemo);
+    document.querySelectorAll("[data-phase-preset]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (phasePhi) phasePhi.value = btn.dataset.phasePreset;
+        drawPhaseDemo();
+      });
+    });
+    drawPhaseDemo();
+  }
+
+  /* ========== Travelling wave demo ========== */
+  const travelCanvas = document.getElementById("travelCanvas");
+  const tctx = travelCanvas.getContext("2d");
+  let travelT = 0;
+  const TRAVEL_K = 1.6;
+  const TRAVEL_OMEGA = 2.2;
+  const TRAVEL_PHI = 0;
+
+  function drawTravel() {
+    const W = travelCanvas.width;
+    const H = travelCanvas.height;
+    const midY = H * 0.52;
+    const scale = H * 0.34;
+    const xScale = 55;
+
+    tctx.fillStyle = "#0e152c";
+    tctx.fillRect(0, 0, W, H);
+    tctx.strokeStyle = "rgba(148,163,184,0.15)";
+    tctx.beginPath();
+    tctx.moveTo(0, midY);
+    tctx.lineTo(W, midY);
+    tctx.stroke();
+
+    tctx.strokeStyle = "#38bdf8";
+    tctx.lineWidth = 2.5;
+    tctx.beginPath();
+    let crestX = 0;
+    let crestY = midY;
+    for (let px = 0; px <= W; px += 2) {
+      const x = px / xScale;
+      const arg = TRAVEL_K * x - TRAVEL_OMEGA * travelT + TRAVEL_PHI;
+      const v = Math.sin(arg);
+      const y = midY - v * scale;
+      if (px === 0) tctx.moveTo(px, y);
+      else tctx.lineTo(px, y);
+      if (v > 0.98 && (px === 0 || v >= Math.sin(TRAVEL_K * ((px - 2) / xScale) - TRAVEL_OMEGA * travelT + TRAVEL_PHI))) {
+        crestX = px;
+        crestY = y;
+      }
+    }
+    tctx.stroke();
+
+    const probeX = W * 0.35;
+    const probeArg = TRAVEL_K * (probeX / xScale) - TRAVEL_OMEGA * travelT + TRAVEL_PHI;
+    const probeY = midY - Math.sin(probeArg) * scale;
+    tctx.fillStyle = "#fbbf24";
+    tctx.beginPath();
+    tctx.arc(probeX, probeY, 6, 0, Math.PI * 2);
+    tctx.fill();
+
+    tctx.fillStyle = "rgba(148,163,184,0.9)";
+    tctx.font = "11px Segoe UI,sans-serif";
+    tctx.fillText("← wave moves this way", crestX + 14, crestY - 10);
+    tctx.fillText("fixed x", probeX - 14, probeY - 14);
+
+    const speed = (TRAVEL_OMEGA / TRAVEL_K).toFixed(2);
+    document.getElementById("travelReadout").textContent =
+      `Inside sine: kx − ωt + φ = ${TRAVEL_K.toFixed(1)}x − ${TRAVEL_OMEGA.toFixed(1)}t. Crest moves right; speed ≈ ω/k ≈ ${speed} (model units). Yellow dot: height at one place oscillates.`;
+  }
+
+  (function travelLoop() {
+    travelT += 0.04;
+    drawTravel();
+    requestAnimationFrame(travelLoop);
+  })();
 
   /* ========== Wave line demo ========== */
   const waveCanvas = document.getElementById("waveCanvas");
@@ -1318,27 +1590,27 @@
 
   /* ========== Feynman paths ========== */
   const pathCanvas = document.getElementById("pathCanvas");
-  const pctx = pathCanvas.getContext("2d");
+  const pathCtx = pathCanvas.getContext("2d");
   let pathT = 0, pathHighlight = false, pathHighlightIdx = 0;
 
   function drawPaths() {
     const W = pathCanvas.width, H = pathCanvas.height;
     const nPaths = +document.getElementById("pathCount").value;
     const anim = +document.getElementById("pathSpeed").value;
-    pctx.fillStyle = "#0e152c";
-    pctx.fillRect(0, 0, W, H);
+    pathCtx.fillStyle = "#0e152c";
+    pathCtx.fillRect(0, 0, W, H);
     const x0 = 50, x1 = W - 60, y0 = H / 2, wallX = 200;
-    pctx.fillStyle = "#334155";
-    pctx.fillRect(wallX - 5, 30, 10, H - 60);
-    pctx.clearRect(wallX - 6, H * 0.38, 12, H * 0.1);
-    pctx.clearRect(wallX - 6, H * 0.52, 12, H * 0.1);
-    pctx.fillStyle = "rgba(148,163,184,0.4)";
-    pctx.fillRect(W - 45, 35, 8, H - 70);
-    pctx.fillStyle = "#9aa8c8";
-    pctx.font = "11px Segoe UI,sans-serif";
-    pctx.fillText("source", x0 - 30, y0);
-    pctx.fillText("slits", wallX - 12, 22);
-    pctx.fillText("screen", W - 52, 22);
+    pathCtx.fillStyle = "#334155";
+    pathCtx.fillRect(wallX - 5, 30, 10, H - 60);
+    pathCtx.clearRect(wallX - 6, H * 0.38, 12, H * 0.1);
+    pathCtx.clearRect(wallX - 6, H * 0.52, 12, H * 0.1);
+    pathCtx.fillStyle = "rgba(148,163,184,0.4)";
+    pathCtx.fillRect(W - 45, 35, 8, H - 70);
+    pathCtx.fillStyle = "#9aa8c8";
+    pathCtx.font = "11px Segoe UI, sans-serif";
+    pathCtx.fillText("source", x0 - 30, y0);
+    pathCtx.fillText("slits", wallX - 12, 22);
+    pathCtx.fillText("screen", W - 52, 22);
 
     for (let i = 0; i < nPaths; i++) {
       const viaTop = i % 2 === 0;
@@ -1352,13 +1624,13 @@
       const phase = (len * 0.08 + pathT * 2) % (2 * Math.PI);
       const hue = 190 + (phase / (2 * Math.PI)) * 80;
       const alpha = pathHighlight && i !== pathHighlightIdx ? 0.12 : 0.55;
-      pctx.strokeStyle = `hsla(${hue}, 85%, 65%, ${alpha})`;
-      pctx.lineWidth = pathHighlight && i === pathHighlightIdx ? 2.8 : 1.2;
-      pctx.beginPath();
-      pctx.moveTo(x0, y0);
-      pctx.quadraticCurveTo(cp1x, cp1y, wallX, ySlit);
-      pctx.quadraticCurveTo(cp2x, cp2y, x1, yEnd);
-      pctx.stroke();
+      pathCtx.strokeStyle = `hsla(${hue}, 85%, 65%, ${alpha})`;
+      pathCtx.lineWidth = pathHighlight && i === pathHighlightIdx ? 2.8 : 1.2;
+      pathCtx.beginPath();
+      pathCtx.moveTo(x0, y0);
+      pathCtx.quadraticCurveTo(cp1x, cp1y, wallX, ySlit);
+      pathCtx.quadraticCurveTo(cp2x, cp2y, x1, yEnd);
+      pathCtx.stroke();
     }
     if (anim) pathT += 0.03;
   }
