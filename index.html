@@ -282,6 +282,10 @@
       color: var(--muted);
       margin-bottom: 0.25rem;
     }
+    .math-steps .step-title .math {
+      text-transform: none;
+      letter-spacing: normal;
+    }
     .step-list {
       counter-reset: step;
       list-style: none;
@@ -381,6 +385,7 @@
         <li><a href="#classical">Classical waves first</a></li>
         <li><a href="#phase">Phase φ explained</a></li>
         <li><a href="#travel-wave">Travelling wave maths</a></li>
+        <li><a href="#unit-circle-theta">Unit circle &amp; Θ</a></li>
         <li><a href="#duality">Wave–particle duality</a></li>
         <li><a href="#water-slits">Water waves: one slit and two</a></li>
         <li><a href="#slits">Double-slit experiment</a></li>
@@ -410,6 +415,9 @@
         <span class="label">Travelling wave</span>
         <span class="math">y(x, t) = A sin(kx − ωt + φ)</span>
       </div>
+      <p>
+        Read it as <span class="math">y = A sin(Θ)</span> with <span class="math">Θ = kx − ωt + φ</span>: <span class="math">Θ</span> is the angle; <span class="math">A sin(Θ)</span> is the height on the <span class="math">y</span>-axis at that <span class="math">x</span> and <span class="math">t</span>.
+      </p>
       <ul>
         <li><span class="math">A</span> — <strong>amplitude</strong> (how tall the wave is)</li>
         <li><span class="math"><a class="sym-ref" href="#sym-k" id="first-k">k</a></span> <dfn class="sym-name">(wave number)</dfn> — how rapidly the pattern repeats in space; related to <span class="math"><a class="sym-ref" href="#sym-lambda" id="first-lambda">λ</a></span> <dfn class="sym-name">(lambda, wavelength)</dfn> by <span class="math">λ = 2π/k</span></li>
@@ -418,30 +426,95 @@
       </ul>
 
       <h3 id="travel-wave">The equation in plain language</h3>
-      <p>The formula only looks intimidating because the symbols are unfamiliar. Each piece is one idea:</p>
+      <p>
+        The whole formula is one familiar pattern: <strong>height on the <span class="math">y</span>-axis = amplitude × sine of an angle</strong>.
+        Write the angle as <span class="math">Θ</span> <dfn class="sym-name">(theta)</dfn>:
+      </p>
+      <div class="eq-block" role="math">
+        <span class="math">Θ = kx − ωt + φ</span>
+        <span class="math" style="margin-left:1.25rem">⇒</span>
+        <span class="math" style="margin-left:1.25rem">y(x, t) = A sin(Θ)</span>
+      </div>
+      <p>
+        Pick a place <span class="math">x</span> and a moment <span class="math">t</span>. Work out <span class="math">Θ</span> from <span class="math">k</span>, <span class="math">ω</span>, and <span class="math">φ</span>.
+        <span class="math">sin(Θ)</span> is a number between −1 and 1 (where you are on the repeating cycle).
+        Multiply by <span class="math">A</span> to get the actual height <span class="math">y</span> on the vertical axis.
+        The symbols <span class="math">kx</span>, <span class="math">−ωt</span>, and <span class="math">φ</span> only exist to build that angle; they are not separate “height” terms.
+      </p>
+      <p>Each piece of <span class="math">Θ = kx − ωt + φ</span> is one idea:</p>
       <ol class="math-steps">
         <li>
           <div class="step-title">① <span class="math">A</span> — amplitude</div>
           How tall the wave is. <span class="math">A = 0.75</span> means crests reach 0.75 above the middle line.
         </li>
         <li>
-          <div class="step-title">② <span class="math">sin( … )</span> — the repeating shape</div>
-          The sine curve repeats every <span class="math">2π</span> radians in its input. Whatever we put inside the brackets is the <strong>phase angle</strong> at that <span class="math">x</span> and <span class="math">t</span>.
+          <div class="step-title">② <span class="math">sin(Θ)</span> — the repeating shape</div>
+          <span class="math">Θ = kx − ωt + φ</span> is the <strong>phase angle</strong> at that <span class="math">x</span> and <span class="math">t</span>.
+          The sine curve repeats every <span class="math">2π</span> radians in <span class="math">Θ</span>; <span class="math">y = A sin(Θ)</span> turns that angle into height on <span class="math">y</span> (see the <a href="#unit-circle-theta">unit circle demo</a>).
         </li>
         <li>
           <div class="step-title">③ <span class="math">kx</span> — ripples along the line</div>
-          As <span class="math">x</span> increases, the pattern repeats in space. Large <span class="math">k</span> → short wavelength <span class="math">λ = 2π/k</span>.
+          As <span class="math">x</span> increases, <span class="math">kx</span> grows and the pattern repeats in space. Large <span class="math">k</span> → short wavelength <span class="math">λ = 2π/k</span>.
         </li>
         <li>
           <div class="step-title">④ <span class="math">−ωt</span> — the pattern moves</div>
           As <span class="math">t</span> increases, <span class="math">−ωt</span> shifts the shape along <span class="math">+x</span> (wave travelling to the right).
         </li>
         <li>
-          <div class="step-title">⑤ <span class="math">+ φ</span> — phase (offset)</div>
+          <div class="step-title">⑤ <span class="math">φ</span> — phase (offset)</div>
           A constant added inside the sine. It slides the whole pattern along <span class="math">x</span>, or at one point sets where you are on the cycle.
         </li>
       </ol>
-      <p>So the full argument is <span class="math">(kx − ωt + φ)</span> = (position) + (time) + (offset). Take the sine of that number to get <span class="math">y</span>.</p>
+      <p>
+        So at any <span class="math">(x, t)</span>: compute <span class="math">Θ = kx − ωt + φ</span>, then <span class="math">y = A sin(Θ)</span>.
+        The three parts of <span class="math">Θ</span> are <span class="math">kx</span> (position in space), <span class="math">−ωt</span> (motion in time), and <span class="math">φ</span> (offset) — only the angle goes into sine; <span class="math">A</span> scales the result to a height.
+      </p>
+
+      <h3 id="unit-circle-theta">Unit circle — how <span class="math">y</span> follows <span class="math">Θ</span></h3>
+      <p>
+        On a circle of radius 1, pick an angle <span class="math">Θ</span> from the positive <span class="math">x</span>-axis.
+        The point on the circle has coordinates <span class="math">(cos Θ, sin Θ)</span>.
+        The <strong>vertical coordinate</strong> <span class="math">sin Θ</span> is exactly the factor that goes into the wave height; multiply by amplitude <span class="math">A</span> to get <span class="math">y = A sin(Θ)</span>.
+        Drag <span class="math">Θ</span> below and watch the height on the right match the blue vertical segment on the circle.
+      </p>
+
+      <div class="diagram-wrap">
+        <p class="demo-label">Interactive — angle <span class="math">Θ</span> on the unit circle → height <span class="math">y = A sin(Θ)</span></p>
+        <canvas id="unitCircleCanvas" width="720" height="300" aria-label="Unit circle showing sin theta and wave height"></canvas>
+        <div class="controls">
+          <div class="control-group">
+            <label for="thetaSlider">Angle Θ (radians)</label>
+            <input type="range" id="thetaSlider" min="0" max="6.283" step="0.02" value="0.79" />
+          </div>
+          <div class="control-group">
+            <label for="thetaAmp">Amplitude A</label>
+            <input type="range" id="thetaAmp" min="0.4" max="1.4" step="0.05" value="1" />
+          </div>
+          <div class="control-group">
+            <label>&nbsp;</label>
+            <button type="button" data-theta-preset="0" class="primary">Θ = 0</button>
+          </div>
+          <div class="control-group">
+            <label>&nbsp;</label>
+            <button type="button" data-theta-preset="1.5708">Θ = π/2</button>
+          </div>
+          <div class="control-group">
+            <label>&nbsp;</label>
+            <button type="button" data-theta-preset="3.1416">Θ = π</button>
+          </div>
+          <div class="control-group">
+            <label>&nbsp;</label>
+            <button type="button" id="thetaAnimate">Animate Θ</button>
+          </div>
+        </div>
+        <p class="readout" id="unitCircleReadout"></p>
+        <div class="legend">
+          <span><span class="swatch" style="background:#a78bfa"></span> Radius at angle <span class="math">Θ</span></span>
+          <span><span class="swatch" style="background:#38bdf8"></span> <span class="math">sin(Θ)</span> (vertical on unit circle)</span>
+          <span><span class="swatch" style="background:#fbbf24"></span> <span class="math">y = A sin(Θ)</span> (wave height)</span>
+          <span><span class="swatch" style="background:#34d399"></span> Graph <span class="math">y</span> vs <span class="math">Θ</span></span>
+        </div>
+      </div>
 
       <h3 id="phase">What is <span class="math">φ</span> (phase)?</h3>
       <p>At a fixed position — take <span class="math">x = 0</span> — the height is</p>
@@ -841,6 +914,248 @@
   <script>
 (function () {
   "use strict";
+
+  /* ========== Unit circle — y = A sin(Θ) ========== */
+  const unitCircleCanvas = document.getElementById("unitCircleCanvas");
+  const unitCircleCtx = unitCircleCanvas ? unitCircleCanvas.getContext("2d") : null;
+  let thetaAnimating = false;
+  let thetaAnimT = 0;
+
+  function formatThetaLabel(theta) {
+    const pi = Math.PI;
+    const snaps = [
+      [0, "0"],
+      [pi / 2, "π/2"],
+      [pi, "π"],
+      [(3 * pi) / 2, "3π/2"],
+      [2 * pi, "2π"],
+    ];
+    for (const [val, label] of snaps) {
+      if (Math.abs(theta - val) < 0.08) return label;
+    }
+    return `${theta.toFixed(2)} rad`;
+  }
+
+  function drawUnitCircleDemo() {
+    if (!unitCircleCtx || !unitCircleCanvas) return;
+    const W = unitCircleCanvas.width;
+    const H = unitCircleCanvas.height;
+    const thetaEl = document.getElementById("thetaSlider");
+    const ampEl = document.getElementById("thetaAmp");
+    const theta = thetaEl ? +thetaEl.value : 0.79;
+    const A = ampEl ? +ampEl.value : 1;
+    const ctx = unitCircleCtx;
+
+    const circleCx = W * 0.2;
+    const circleCy = H * 0.5;
+    const circleR = H * 0.34;
+    const heightCx = W * 0.48;
+    const heightScale = H * 0.34;
+    const graphLeft = W * 0.62;
+    const graphRight = W - 28;
+    const graphMidY = H * 0.5;
+    const graphH = H * 0.34;
+
+    const cosT = Math.cos(theta);
+    const sinT = Math.sin(theta);
+    const px = circleCx + circleR * cosT;
+    const py = circleCy - circleR * sinT;
+    const heightDotY = graphMidY - A * sinT * (heightScale / 1.45);
+
+    ctx.fillStyle = "#0e152c";
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.strokeStyle = "rgba(148,163,184,0.2)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(circleCx - circleR - 16, circleCy);
+    ctx.lineTo(circleCx + circleR + 24, circleCy);
+    ctx.moveTo(circleCx, circleCy - circleR - 12);
+    ctx.lineTo(circleCx, circleCy + circleR + 12);
+    ctx.stroke();
+
+    ctx.strokeStyle = "rgba(148,163,184,0.45)";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(circleCx, circleCy, circleR, 0, Math.PI * 2);
+    ctx.stroke();
+
+    if (theta > 0.02) {
+      ctx.fillStyle = "rgba(167,139,250,0.12)";
+      ctx.beginPath();
+      ctx.moveTo(circleCx, circleCy);
+      ctx.arc(circleCx, circleCy, circleR, -theta, 0, true);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    ctx.strokeStyle = "#a78bfa";
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(circleCx, circleCy);
+    ctx.lineTo(px, py);
+    ctx.stroke();
+
+    ctx.strokeStyle = "rgba(148,163,184,0.35)";
+    ctx.setLineDash([3, 4]);
+    ctx.beginPath();
+    ctx.moveTo(px, py);
+    ctx.lineTo(px, circleCy);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.strokeStyle = "#38bdf8";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(px, circleCy);
+    ctx.lineTo(px, py);
+    ctx.stroke();
+
+    ctx.fillStyle = "#a78bfa";
+    ctx.beginPath();
+    ctx.arc(px, py, 6, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "#38bdf8";
+    ctx.beginPath();
+    ctx.arc(px, circleCy, 4, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = "#9aa8c8";
+    ctx.font = "11px Segoe UI, system-ui, sans-serif";
+    ctx.fillText("unit circle (radius 1)", circleCx - 52, 18);
+    ctx.fillText("Θ", circleCx + circleR * 0.55 * Math.cos(-theta / 2) - 4, circleCy + circleR * 0.55 * Math.sin(-theta / 2) + 4);
+    ctx.fillText("sin(Θ)", px + 8, (py + circleCy) / 2);
+    ctx.fillText("cos(Θ)", (circleCx + px) / 2, circleCy + 14);
+
+    ctx.strokeStyle = "rgba(148,163,184,0.25)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(heightCx, graphMidY - heightScale);
+    ctx.lineTo(heightCx, graphMidY + heightScale);
+    ctx.stroke();
+    ctx.strokeStyle = "rgba(148,163,184,0.15)";
+    ctx.beginPath();
+    ctx.moveTo(heightCx - 50, graphMidY);
+    ctx.lineTo(heightCx + 50, graphMidY);
+    ctx.stroke();
+
+    ctx.strokeStyle = "rgba(56,189,248,0.35)";
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(px, py);
+    ctx.lineTo(heightCx, heightDotY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = "#fbbf24";
+    ctx.beginPath();
+    ctx.arc(heightCx, heightDotY, 8, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = "#fbbf24";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(heightCx, graphMidY);
+    ctx.lineTo(heightCx, heightDotY);
+    ctx.stroke();
+
+    ctx.fillStyle = "#9aa8c8";
+    ctx.fillText("y = A sin(Θ)", heightCx - 28, 18);
+    ctx.fillText(`A = ${A.toFixed(2)}`, heightCx - 22, H - 12);
+
+    const graphW = graphRight - graphLeft;
+    ctx.strokeStyle = "rgba(148,163,184,0.25)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(graphLeft, graphMidY);
+    ctx.lineTo(graphRight, graphMidY);
+    ctx.moveTo(graphLeft, graphMidY - graphH);
+    ctx.lineTo(graphLeft, graphMidY + graphH);
+    ctx.stroke();
+
+    ctx.strokeStyle = "#34d399";
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    for (let i = 0; i <= graphW; i += 2) {
+      const th = (i / graphW) * Math.PI * 2;
+      const gx = graphLeft + i;
+      const gy = graphMidY - A * Math.sin(th) * (graphH / 1.45);
+      if (i === 0) ctx.moveTo(gx, gy);
+      else ctx.lineTo(gx, gy);
+    }
+    ctx.stroke();
+
+    const markerX = graphLeft + (theta / (Math.PI * 2)) * graphW;
+    const markerY = graphMidY - A * sinT * (graphH / 1.45);
+    ctx.strokeStyle = "rgba(251,191,36,0.5)";
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    ctx.moveTo(markerX, graphMidY);
+    ctx.lineTo(markerX, markerY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#fbbf24";
+    ctx.beginPath();
+    ctx.arc(markerX, markerY, 7, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = "#9aa8c8";
+    ctx.fillText("y vs Θ", graphLeft, 18);
+    ctx.fillText("Θ →", graphRight - 28, graphMidY + 18);
+
+    const thetaLabel = formatThetaLabel(theta);
+    const deg = ((theta * 180) / Math.PI).toFixed(0);
+    const readout = document.getElementById("unitCircleReadout");
+    if (readout) {
+      readout.textContent =
+        `Θ = ${thetaLabel} (${deg}°); sin(Θ) = ${sinT.toFixed(3)}; y = ${A.toFixed(2)} × ${sinT.toFixed(3)} = ${(A * sinT).toFixed(3)}. ` +
+        `On the wave, Θ = kx − ωt + φ at your chosen x and t — same sine, scaled by A.`;
+    }
+  }
+
+  function thetaAnimLoop() {
+    if (!thetaAnimating) return;
+    thetaAnimT += 0.028;
+    const slider = document.getElementById("thetaSlider");
+    if (slider) {
+      slider.value = String(thetaAnimT % (Math.PI * 2));
+      drawUnitCircleDemo();
+    }
+    requestAnimationFrame(thetaAnimLoop);
+  }
+
+  if (unitCircleCanvas && unitCircleCtx) {
+    const thetaSlider = document.getElementById("thetaSlider");
+    const thetaAmp = document.getElementById("thetaAmp");
+    const thetaAnimateBtn = document.getElementById("thetaAnimate");
+    if (thetaSlider) {
+      thetaSlider.addEventListener("input", () => {
+        thetaAnimating = false;
+        if (thetaAnimateBtn) thetaAnimateBtn.textContent = "Animate Θ";
+        drawUnitCircleDemo();
+      });
+    }
+    if (thetaAmp) thetaAmp.addEventListener("input", drawUnitCircleDemo);
+    document.querySelectorAll("[data-theta-preset]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        thetaAnimating = false;
+        if (thetaAnimateBtn) thetaAnimateBtn.textContent = "Animate Θ";
+        if (thetaSlider) thetaSlider.value = btn.dataset.thetaPreset;
+        drawUnitCircleDemo();
+      });
+    });
+    if (thetaAnimateBtn) {
+      thetaAnimateBtn.addEventListener("click", () => {
+        thetaAnimating = !thetaAnimating;
+        thetaAnimateBtn.textContent = thetaAnimating ? "Stop" : "Animate Θ";
+        if (thetaAnimating) {
+          const slider = document.getElementById("thetaSlider");
+          thetaAnimT = slider ? +slider.value : 0;
+          requestAnimationFrame(thetaAnimLoop);
+        }
+      });
+    }
+    drawUnitCircleDemo();
+  }
 
   /* ========== Phase φ demo (snapshot t = 0) ========== */
   const phaseCanvas = document.getElementById("phaseCanvas");
