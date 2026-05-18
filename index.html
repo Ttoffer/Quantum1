@@ -369,6 +369,7 @@
           <tr id="sym-lambda"><td class="glyph"><a href="#sym-lambda">λ</a></td><td>lambda</td><td>Wavelength (distance between repeats)</td></tr>
           <tr id="sym-k"><td class="glyph"><a href="#sym-k">k</a></td><td>wave number</td><td><span class="math">k = 2π/λ</span> — radians of phase per metre</td></tr>
           <tr id="sym-omega"><td class="glyph"><a href="#sym-omega">ω</a></td><td>omega</td><td>Angular frequency — radians per second</td></tr>
+          <tr id="sym-f"><td class="glyph"><a href="#sym-f">f</a></td><td>frequency</td><td>Ordinary frequency (cycles per second, Hz); <span class="math">f = ω/(2π)</span></td></tr>
           <tr id="sym-phi"><td class="glyph"><a href="#sym-phi">φ</a></td><td>phi</td><td>Phase shift of a wave</td></tr>
           <tr id="sym-h"><td class="glyph"><a href="#sym-h">h</a></td><td>Planck constant</td><td>Quantum of action; <span class="math">h ≈ 6.63×10⁻³⁴ J·s</span></td></tr>
           <tr id="sym-hbar"><td class="glyph"><a href="#sym-hbar">ℏ</a></td><td>h-bar</td><td>Reduced Planck constant <span class="math">ℏ = h/(2π)</span></td></tr>
@@ -386,6 +387,7 @@
         <li><a href="#phase">Phase φ explained</a></li>
         <li><a href="#travel-wave">Travelling wave maths</a></li>
         <li><a href="#unit-circle-theta">Unit circle &amp; Θ</a></li>
+        <li><a href="#frequency-velocity">Frequency &amp; wave speed</a></li>
         <li><a href="#duality">Wave–particle duality</a></li>
         <li><a href="#water-slits">Water waves: one slit and two</a></li>
         <li><a href="#slits">Double-slit experiment</a></li>
@@ -421,7 +423,8 @@
       <ul>
         <li><span class="math">A</span> — <strong>amplitude</strong> (how tall the wave is)</li>
         <li><span class="math"><a class="sym-ref" href="#sym-k" id="first-k">k</a></span> <dfn class="sym-name">(wave number)</dfn> — how rapidly the pattern repeats in space; related to <span class="math"><a class="sym-ref" href="#sym-lambda" id="first-lambda">λ</a></span> <dfn class="sym-name">(lambda, wavelength)</dfn> by <span class="math">λ = 2π/k</span></li>
-        <li><span class="math"><a class="sym-ref" href="#sym-omega" id="first-omega">ω</a></span> <dfn class="sym-name">(omega, angular frequency)</dfn> — how fast the pattern oscillates in time</li>
+        <li><span class="math"><a class="sym-ref" href="#sym-omega" id="first-omega">ω</a></span> <dfn class="sym-name">(omega, angular frequency)</dfn> — how fast the phase angle changes in time (radians per second); ordinary frequency <span class="math"><a class="sym-ref" href="#sym-f" id="first-f">f</a></span> <dfn class="sym-name">(hertz)</dfn> is <span class="math">f = ω/(2π)</span> — see <a href="#frequency-velocity">below</a></li>
+        <li><span class="math">v</span> — <strong>wave speed</strong> along the line: <span class="math">v = ω/k</span> (also <span class="math">v = fλ</span>) — <a href="#frequency-velocity">below</a></li>
         <li><span class="math"><a class="sym-ref" href="#sym-phi" id="first-phi">φ</a></span> <dfn class="sym-name">(phi, phase)</dfn> — see <a href="#phase">below</a>; how the wave is lined up in space and time</li>
       </ul>
 
@@ -516,6 +519,86 @@
         </div>
       </div>
 
+      <h3 id="frequency-velocity">Frequency <span class="math">f</span> and wave speed <span class="math">v</span></h3>
+      <p>
+        The same angle <span class="math">Θ</span> from the <a href="#unit-circle-theta">unit circle</a> appears inside the travelling wave.
+        Fix a place on the rope (<span class="math">x</span> constant). Then <span class="math">Θ = −ωt +</span> (constants), so as time passes the angle spins the same way as on the circle.
+        <strong>One full turn</strong> of the circle (<span class="math">Θ</span> increasing by <span class="math">2π</span> radians) is <strong>one complete oscillation</strong> up and down at that point.
+      </p>
+      <p>
+        Physicists often write <span class="math">ω</span> in <strong>radians per second</strong> (how fast the angle changes).
+        In everyday units we count <strong>cycles per second</strong> — that is the frequency <span class="math">f</span> in hertz (Hz):
+      </p>
+      <div class="eq-block" role="math">
+        <span class="label">Ordinary frequency</span>
+        <span class="math">f = ω / (2π)</span>
+        <span class="math" style="margin-left:1.25rem">⇔</span>
+        <span class="math" style="margin-left:1.25rem">ω = 2πf</span>
+      </div>
+      <p>
+        A cycle is one full <span class="math">2π</span> swing of the angle, so <span class="math">ω</span> radians per second means <span class="math">ω/(2π)</span> cycles per second.
+        The time for one cycle is the <strong>period</strong> <span class="math">T = 1/f = 2π/ω</span>.
+      </p>
+      <p>
+        In space, the pattern repeats every wavelength <span class="math">λ = 2π/k</span>.
+        In time, it repeats every period <span class="math">T</span>.
+        A crest (or any fixed point on the shape) travels along the line at the <strong>wave speed</strong>:
+      </p>
+      <div class="eq-block" role="math">
+        <span class="label">Wave speed</span>
+        <span class="math">v = ω / k</span>
+        <span class="math" style="margin-left:1.25rem">⇔</span>
+        <span class="math" style="margin-left:1.25rem">v = f λ</span>
+      </div>
+      <p>
+        The second form is intuitive: each second the wave completes <span class="math">f</span> cycles, and each cycle is <span class="math">λ</span> long in space, so the pattern advances <span class="math">fλ</span> metres per second.
+        You can check: <span class="math">ω/k = (2πf)/(2π/λ) = fλ</span>.
+      </p>
+      <ol class="math-steps">
+        <li>
+          <div class="step-title">① At fixed <span class="math">x</span> — link to the unit circle</div>
+          Height is <span class="math">y = A sin(Θ)</span> with <span class="math">Θ</span> changing like the angle on the unit circle.
+          When <span class="math">ω = 2π</span> rad/s, the angle goes around once per second, so <span class="math">f = 1</span> Hz.
+        </li>
+        <li>
+          <div class="step-title">② Crests move — where <span class="math">v = ω/k</span> comes from</div>
+          A crest stays at the top of the sine, so <span class="math">kx − ωt + φ = π/2</span> (plus whole multiples of <span class="math">2π</span>).
+          Solve for <span class="math">x</span>: <span class="math">x = (π/2 − φ + ωt)/k</span>.
+          As <span class="math">t</span> increases by 1 s, <span class="math">x</span> increases by <span class="math">ω/k</span> — that is <span class="math">v</span>.
+        </li>
+        <li>
+          <div class="step-title">③ Same numbers, two views</div>
+          <span class="math">k</span> and <span class="math">ω</span> are radians per metre and per second; <span class="math">λ</span> and <span class="math">f</span> are “per cycle” in space and time.
+          Use whichever pair feels clearer — they are tied by <span class="math">2π</span>.
+        </li>
+      </ol>
+
+      <div class="diagram-wrap">
+        <p class="demo-label">Interactive — at one place the angle spins (<span class="math">f = ω/2π</span>); the whole pattern drifts at <span class="math">v = ω/k</span></p>
+        <canvas id="freqVelCanvas" width="720" height="320" aria-label="Frequency from unit circle rotation and wave speed along the line"></canvas>
+        <div class="controls">
+          <div class="control-group">
+            <label for="freqVelOmega">Angular frequency ω</label>
+            <input type="range" id="freqVelOmega" min="1" max="5" step="0.1" value="2.2" />
+          </div>
+          <div class="control-group">
+            <label for="freqVelK">Wave number k</label>
+            <input type="range" id="freqVelK" min="0.8" max="3.2" step="0.1" value="1.6" />
+          </div>
+          <div class="control-group">
+            <label>&nbsp;</label>
+            <button type="button" id="freqVelPause" class="primary">Pause</button>
+          </div>
+        </div>
+        <p class="readout" id="freqVelReadout"></p>
+        <div class="legend">
+          <span><span class="swatch" style="background:#a78bfa"></span> Unit circle at fixed <span class="math">x</span> (<span class="math">Θ = −ωt</span>)</span>
+          <span><span class="swatch" style="background:#fbbf24"></span> Height at that place</span>
+          <span><span class="swatch" style="background:#38bdf8"></span> Travelling wave; crest → speed <span class="math">v</span></span>
+          <span><span class="swatch" style="background:#34d399"></span> One wavelength <span class="math">λ</span></span>
+        </div>
+      </div>
+
       <h3 id="phase">What is <span class="math">φ</span> (phase)?</h3>
       <p>At a fixed position — take <span class="math">x = 0</span> — the height is</p>
       <div class="eq-block">
@@ -571,7 +654,7 @@
         </li>
         <li>
           <div class="step-title">Example C — why it “travels”</div>
-          Crest where <span class="math">kx − ωt + φ = π/2</span>. So <span class="math">x = (π/2 − φ + ωt)/k</span>. As <span class="math">t</span> grows, <span class="math">x</span> grows → crest moves right. Speed ≈ <span class="math">ω/k</span>.
+          Crest where <span class="math">kx − ωt + φ = π/2</span>. So <span class="math">x = (π/2 − φ + ωt)/k</span>. As <span class="math">t</span> grows, <span class="math">x</span> grows → crest moves right. Wave speed <span class="math">v = ω/k</span> — see <a href="#frequency-velocity">frequency &amp; speed</a>.
         </li>
       </ul>
 
@@ -1108,7 +1191,7 @@
     if (readout) {
       readout.textContent =
         `Θ = ${thetaLabel} (${deg}°); sin(Θ) = ${sinT.toFixed(3)}; y = ${A.toFixed(2)} × ${sinT.toFixed(3)} = ${(A * sinT).toFixed(3)}. ` +
-        `On the wave, Θ = kx − ωt + φ at your chosen x and t — same sine, scaled by A.`;
+        `On the wave, Θ = kx − ωt + φ at your chosen x and t — same sine, scaled by A. At fixed x, Θ spins at rate ω; frequency f = ω/(2π) — see frequency & speed.`;
     }
   }
 
@@ -1155,6 +1238,217 @@
       });
     }
     drawUnitCircleDemo();
+  }
+
+  /* ========== Frequency f and wave speed v ========== */
+  const freqVelCanvas = document.getElementById("freqVelCanvas");
+  const freqVelCtx = freqVelCanvas ? freqVelCanvas.getContext("2d") : null;
+  let freqVelT = 0;
+  let freqVelPaused = false;
+
+  function drawFreqVelDemo() {
+    if (!freqVelCtx || !freqVelCanvas) return;
+    const W = freqVelCanvas.width;
+    const H = freqVelCanvas.height;
+    const omegaEl = document.getElementById("freqVelOmega");
+    const kEl = document.getElementById("freqVelK");
+    const omega = omegaEl ? +omegaEl.value : 2.2;
+    const k = kEl ? +kEl.value : 1.6;
+    const A = 0.85;
+    const theta = -omega * freqVelT;
+    const sinT = Math.sin(theta);
+    const cosT = Math.cos(theta);
+    const lambda = (2 * Math.PI) / k;
+    const f = omega / (2 * Math.PI);
+    const period = (2 * Math.PI) / omega;
+    const v = omega / k;
+    const ctx = freqVelCtx;
+
+    const panelH = H * 0.46;
+    const waveTop = panelH + 14;
+    const waveH = H - waveTop - 18;
+
+    ctx.fillStyle = "#0e152c";
+    ctx.fillRect(0, 0, W, H);
+
+    const circleCx = W * 0.14;
+    const circleCy = panelH * 0.52;
+    const circleR = panelH * 0.34;
+    const px = circleCx + circleR * cosT;
+    const py = circleCy - circleR * sinT;
+
+    ctx.strokeStyle = "rgba(148,163,184,0.2)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(circleCx - circleR - 10, circleCy);
+    ctx.lineTo(circleCx + circleR + 18, circleCy);
+    ctx.moveTo(circleCx, circleCy - circleR - 8);
+    ctx.lineTo(circleCx, circleCy + circleR + 8);
+    ctx.stroke();
+
+    ctx.strokeStyle = "rgba(148,163,184,0.45)";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(circleCx, circleCy, circleR, 0, Math.PI * 2);
+    ctx.stroke();
+
+    const turns = Math.floor((omega * freqVelT) / (2 * Math.PI));
+    if (theta > 0.05) {
+      ctx.fillStyle = "rgba(167,139,250,0.14)";
+      ctx.beginPath();
+      ctx.moveTo(circleCx, circleCy);
+      ctx.arc(circleCx, circleCy, circleR, -theta, 0, true);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    ctx.strokeStyle = "#a78bfa";
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(circleCx, circleCy);
+    ctx.lineTo(px, py);
+    ctx.stroke();
+
+    ctx.strokeStyle = "#38bdf8";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(px, circleCy);
+    ctx.lineTo(px, py);
+    ctx.stroke();
+
+    ctx.fillStyle = "#a78bfa";
+    ctx.beginPath();
+    ctx.arc(px, py, 5, 0, Math.PI * 2);
+    ctx.fill();
+
+    const oscCx = W * 0.34;
+    const oscMid = panelH * 0.52;
+    const oscScale = panelH * 0.34;
+    ctx.strokeStyle = "rgba(148,163,184,0.2)";
+    ctx.beginPath();
+    ctx.moveTo(oscCx, oscMid - oscScale);
+    ctx.lineTo(oscCx, oscMid + oscScale);
+    ctx.stroke();
+
+    ctx.strokeStyle = "rgba(251,191,36,0.35)";
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(px, py);
+    ctx.lineTo(oscCx, oscMid - A * sinT * oscScale);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.strokeStyle = "#fbbf24";
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    for (let i = 0; i <= 120; i++) {
+      const tt = freqVelT - 1.2 + (i / 120) * 2.4;
+      const yy = oscMid - A * Math.sin(-omega * tt) * oscScale;
+      const x = oscCx - 44 + (i / 120) * 88;
+      if (i === 0) ctx.moveTo(x, yy);
+      else ctx.lineTo(x, yy);
+    }
+    ctx.stroke();
+
+    ctx.fillStyle = "#fbbf24";
+    ctx.beginPath();
+    ctx.arc(oscCx, oscMid - A * sinT * oscScale, 7, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = "#9aa8c8";
+    ctx.font = "11px Segoe UI, system-ui, sans-serif";
+    ctx.fillText("fixed x — Θ = −ωt", circleCx - 48, 14);
+    ctx.fillText("y = A sin(Θ)", oscCx - 32, 14);
+    ctx.fillText(`cycles: ${turns}  (2π rad each)`, circleCx - 52, panelH - 8);
+
+    const waveLeft = W * 0.52;
+    const waveRight = W - 20;
+    const waveMid = waveTop + waveH * 0.52;
+    const waveScale = waveH * 0.36;
+    const xScale = 52;
+
+    ctx.strokeStyle = "rgba(148,163,184,0.15)";
+    ctx.beginPath();
+    ctx.moveTo(waveLeft, waveMid);
+    ctx.lineTo(waveRight, waveMid);
+    ctx.stroke();
+
+    ctx.strokeStyle = "#38bdf8";
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    let crestPx = waveLeft;
+    let crestPy = waveMid;
+    for (let pxw = waveLeft; pxw <= waveRight; pxw += 2) {
+      const x = (pxw - waveLeft) / xScale;
+      const arg = k * x - omega * freqVelT;
+      const val = Math.sin(arg);
+      const y = waveMid - val * waveScale;
+      if (pxw === waveLeft) ctx.moveTo(pxw, y);
+      else ctx.lineTo(pxw, y);
+      if (val > 0.98) {
+        crestPx = pxw;
+        crestPy = y;
+      }
+    }
+    ctx.stroke();
+
+    const lambdaPx = (lambda * xScale);
+    const lamX0 = Math.max(waveLeft, crestPx - lambdaPx * 0.35);
+    const lamX1 = lamX0 + lambdaPx;
+    if (lamX1 < waveRight - 8) {
+      ctx.strokeStyle = "#34d399";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(lamX0, waveTop + 8);
+      ctx.lineTo(lamX0, waveTop + 22);
+      ctx.moveTo(lamX1, waveTop + 8);
+      ctx.lineTo(lamX1, waveTop + 22);
+      ctx.moveTo(lamX0, waveTop + 15);
+      ctx.lineTo(lamX1, waveTop + 15);
+      ctx.stroke();
+      ctx.fillStyle = "#34d399";
+      ctx.fillText("λ", (lamX0 + lamX1) / 2 - 4, waveTop + 6);
+    }
+
+    const fixedPx = waveLeft + (waveRight - waveLeft) * 0.22;
+    const fixedX = (fixedPx - waveLeft) / xScale;
+    const fixedArg = k * fixedX - omega * freqVelT;
+    const fixedY = waveMid - Math.sin(fixedArg) * waveScale;
+    ctx.fillStyle = "#fbbf24";
+    ctx.beginPath();
+    ctx.arc(fixedPx, fixedY, 6, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = "rgba(148,163,184,0.9)";
+    ctx.fillText("← crest moves at v = ω/k", crestPx + 8, crestPy - 10);
+    ctx.fillText("travelling wave y = sin(kx − ωt)", waveLeft, waveTop - 2);
+
+    const readout = document.getElementById("freqVelReadout");
+    if (readout) {
+      readout.textContent =
+        `ω = ${omega.toFixed(2)} rad/s → f = ω/(2π) = ${f.toFixed(3)} Hz (period T = ${period.toFixed(2)} s). ` +
+        `k = ${k.toFixed(2)} rad/m → λ = 2π/k = ${lambda.toFixed(2)}. Wave speed v = ω/k = fλ = ${v.toFixed(2)} (model units). ` +
+        `Purple: one full rotation = 2π rad = one cycle at fixed x.`;
+    }
+  }
+
+  if (freqVelCanvas && freqVelCtx) {
+    const freqVelOmega = document.getElementById("freqVelOmega");
+    const freqVelK = document.getElementById("freqVelK");
+    const freqVelPauseBtn = document.getElementById("freqVelPause");
+    if (freqVelOmega) freqVelOmega.addEventListener("input", drawFreqVelDemo);
+    if (freqVelK) freqVelK.addEventListener("input", drawFreqVelDemo);
+    if (freqVelPauseBtn) {
+      freqVelPauseBtn.addEventListener("click", () => {
+        freqVelPaused = !freqVelPaused;
+        freqVelPauseBtn.textContent = freqVelPaused ? "Play" : "Pause";
+      });
+    }
+    (function freqVelLoop() {
+      if (!freqVelPaused) freqVelT += 0.04;
+      drawFreqVelDemo();
+      requestAnimationFrame(freqVelLoop);
+    })();
   }
 
   /* ========== Phase φ demo (snapshot t = 0) ========== */
