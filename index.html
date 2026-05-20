@@ -238,6 +238,8 @@
       font-size: 1.08em;
       padding: 0.05em 0.15em;
       color: #dbeafe;
+      text-transform: none;
+      letter-spacing: normal;
     }
     dfn.sym-name {
       font-style: normal;
@@ -259,6 +261,13 @@
       color: var(--link-hover);
       text-decoration-style: solid;
       text-decoration-color: currentColor;
+    }
+    .demo-label .math,
+    .control-group label .math,
+    .control-group label .sym-ref,
+    .math-steps .step-title .math {
+      text-transform: none;
+      letter-spacing: normal;
     }
     .note a { color: var(--link); }
     .eq-block {
@@ -312,10 +321,6 @@
       letter-spacing: 0.06em;
       color: var(--muted);
       margin-bottom: 0.25rem;
-    }
-    .math-steps .step-title .math {
-      text-transform: none;
-      letter-spacing: normal;
     }
     .step-list {
       counter-reset: step;
@@ -518,11 +523,11 @@
         <canvas id="unitCircleCanvas" width="720" height="400" aria-label="Unit circle showing sin theta and wave height"></canvas>
         <div class="controls">
           <div class="control-group">
-            <label for="thetaSlider">Angle Θ (radians)</label>
+            <label for="thetaSlider">Angle <span class="math">Θ</span> (radians)</label>
             <input type="range" id="thetaSlider" min="0" max="6.283" step="0.02" value="0.79" />
           </div>
           <div class="control-group">
-            <label for="thetaAmp">Amplitude A</label>
+            <label for="thetaAmp">Amplitude <span class="math">A</span></label>
             <input type="range" id="thetaAmp" min="0" max="2" step="0.05" value="1" />
           </div>
           <div class="control-group">
@@ -606,15 +611,15 @@
       </ol>
 
       <div class="diagram-wrap">
-        <p class="demo-label">Interactive — at one place the angle spins (<span class="math">f = ω/2π</span>); the whole pattern drifts at <span class="math">v = ω/k</span></p>
+        <p class="demo-label">Interactive — at one place the angle spins (<span class="math">f = ω/(2π)</span>); the whole pattern drifts at <span class="math">v = ω/k</span></p>
         <canvas id="freqVelCanvas" width="720" height="320" aria-label="Frequency from unit circle rotation and wave speed along the line"></canvas>
         <div class="controls">
           <div class="control-group">
-            <label for="freqVelOmega">Angular frequency ω</label>
+            <label for="freqVelOmega">Angular frequency <span class="math">ω</span></label>
             <input type="range" id="freqVelOmega" min="1" max="5" step="0.1" value="2.2" />
           </div>
           <div class="control-group">
-            <label for="freqVelK">Wave number k</label>
+            <label for="freqVelK">Wave number <span class="math">k</span></label>
             <input type="range" id="freqVelK" min="0.8" max="3.2" step="0.1" value="1.6" />
           </div>
           <div class="control-group">
@@ -649,7 +654,7 @@
         <canvas id="phaseCanvas" width="720" height="260" aria-label="Phase offset and sine versus cosine"></canvas>
         <div class="controls">
           <div class="control-group">
-            <label for="phasePhi">Phase φ (radians)</label>
+            <label for="phasePhi">Phase <span class="math">φ</span> (radians)</label>
             <input type="range" id="phasePhi" min="0" max="6.28" step="0.02" value="0" />
           </div>
           <div class="control-group">
@@ -667,7 +672,7 @@
         </div>
         <p class="readout" id="phaseReadout"></p>
         <div class="legend">
-          <span><span class="swatch" style="background:#38bdf8"></span> <span class="math">y = sin(kx + φ)</span> at <span class="math">t=0</span></span>
+          <span><span class="swatch" style="background:#38bdf8"></span> <span class="math">y = A sin(kx + φ)</span> at <span class="math">t = 0</span> (<span class="math">A = 1</span> here)</span>
           <span><span class="swatch" style="background:#fbbf24"></span> Point at <span class="math">x = 0</span></span>
         </div>
       </div>
@@ -711,15 +716,15 @@
             </select>
           </div>
           <div class="control-group">
-            <label for="waveAmp">Amplitude A</label>
+            <label for="waveAmp">Amplitude <span class="math">A</span></label>
             <input type="range" id="waveAmp" min="0.2" max="1" step="0.05" value="0.75" />
           </div>
           <div class="control-group">
-            <label for="waveK">Wave number k</label>
+            <label for="waveK">Wave number <span class="math">k</span></label>
             <input type="range" id="waveK" min="0.8" max="3.5" step="0.1" value="1.6" />
           </div>
           <div class="control-group">
-            <label for="wavePhase">Phase φ (wave 2)</label>
+            <label for="wavePhase">Phase <span class="math">φ</span> (wave 2)</label>
             <input type="range" id="wavePhase" min="0" max="6.28" step="0.05" value="1.57" />
           </div>
           <div class="control-group">
@@ -895,7 +900,7 @@
 
       <ol class="math-steps">
         <li>
-          <div class="step-title">① Same phase angle Θ as before</div>
+          <div class="step-title">① Same phase angle <span class="math">Θ</span> as before</div>
           Define <span class="math">Θ = kx − ωt + φ</span> exactly as in the classical wave. Space (through <span class="math">k</span>) and time (through <span class="math">ω</span>) enter in the same way.
         </li>
         <li>
@@ -906,13 +911,13 @@
           (You could equally use the Real part and get a cosine — same physics, different initial phase.)
         </li>
         <li>
-          <div class="step-title">③ Name the full complex amplitude ψ</div>
+          <div class="step-title">③ Name the full complex amplitude <span class="math">ψ</span></div>
           Define <span class="math">ψ = A e<sup>iΘ</sup> = A e<sup>i(kx − ωt + φ)</sup></span>.
           Then <strong>Real part</strong> <span class="math">= A cos(Θ)</span>, <strong>Imaginary part</strong> <span class="math">= A sin(Θ)</span>.
           The classical rope height you see is one slice of this complex object — usually the Imaginary part.
         </li>
         <li>
-          <div class="step-title">④ Matter waves supply k and ω</div>
+          <div class="step-title">④ Matter waves supply <span class="math">k</span> and <span class="math">ω</span></div>
           For a particle, de Broglie sets <span class="math">λ = h/p</span>, hence <span class="math">k = 2π/λ</span>.
           Quantum mechanics also links energy to frequency (<span class="math">E = hf</span>, and <span class="math">ω = 2πf</span>).
           So the <em>shape</em> of the travelling factor is the same; the constants are fixed by particle momentum and energy.
@@ -925,8 +930,39 @@
         </li>
       </ol>
 
+      <h3 id="re-im-same-theta">Same Θ: cosine and sine are a quarter-cycle apart</h3>
+      <p>
+        With <span class="math">ψ = A e<sup>iΘ</sup></span>, Euler’s formula gives
+        <span class="math">A e<sup>iΘ</sup> = A cos(Θ) + i A sin(Θ)</span>.
+        The <strong>Real part</strong> and <strong>Imaginary part</strong> are not two unrelated ripples: they use the <em>same</em> phase angle <span class="math">Θ</span> — horizontal cosine on the real axis, vertical sine on the imaginary axis in the complex plane.
+        As functions of <span class="math">Θ</span>, one is the other shifted by <span class="math">π/2</span> radians (90°):
+        <span class="math">sin(Θ) = cos(Θ − π/2)</span>.
+        The plot below uses <span class="math">Θ</span> on the horizontal axis so that shift is visible directly; the next demo then shows the same <span class="math">A cos(Θ)</span> and <span class="math">A sin(Θ)</span> versus position <span class="math">x</span> along the rope.
+      </p>
+
       <div class="diagram-wrap">
-        <p class="demo-label">Same Θ — classical sine matches Imaginary part of <span class="math">ψ = A e<sup>iΘ</sup></span></p>
+        <p class="demo-label">Interactive — same <span class="math">Θ</span>: <span class="math">A cos(Θ)</span> (Real) and <span class="math">A sin(Θ)</span> (Imaginary), <span class="math">A = 1</span>; sine lags cosine by <span class="math">π/2</span></p>
+        <canvas id="reImThetaCanvas" width="720" height="260" aria-label="Cosine and sine versus phase angle Theta; sine is cosine shifted by pi over 2"></canvas>
+        <div class="controls">
+          <div class="control-group">
+            <label for="reImThetaMark">Highlight angle <span class="math">Θ</span> (rad)</label>
+            <input type="range" id="reImThetaMark" min="0" max="628" step="2" value="157" />
+          </div>
+          <div class="control-group">
+            <label>&nbsp;</label>
+            <button type="button" id="reImThetaPause" class="primary">Pause</button>
+          </div>
+        </div>
+        <p class="readout" id="reImThetaReadout"></p>
+        <div class="legend">
+          <span><span class="swatch" style="background:#94a3b8"></span> <span class="math">A cos(Θ)</span> (Real part)</span>
+          <span><span class="swatch" style="background:#f472b6"></span> <span class="math">A sin(Θ)</span> (Imaginary part)</span>
+          <span><span class="swatch" style="background:#fbbf24"></span> Chosen <span class="math">Θ</span> — amber vertical guide</span>
+        </div>
+      </div>
+
+      <div class="diagram-wrap">
+        <p class="demo-label">Same <span class="math">Θ</span> — classical sine matches Imaginary part of <span class="math">ψ = A e<sup>iΘ</sup></span></p>
         <canvas id="bridgeCanvas" width="720" height="300" aria-label="Bridge from classical sine wave to complex psi"></canvas>
         <div class="controls">
           <div class="control-group">
@@ -1098,7 +1134,7 @@
           <span class="math">|ψ|² = |ψ₁ + ψ₂|²</span>
         </li>
         <li>
-          <div class="step-title">Step 3 — expand (Real and Imaginary parts of both ψ₁ and ψ₂)</div>
+          <div class="step-title">Step 3 — expand (Real and Imaginary parts of both <span class="math">ψ₁</span> and <span class="math">ψ₂</span>)</div>
           <span class="math">|ψ₁ + ψ₂|² = |ψ₁|² + |ψ₂|² + 2 × (real part of ψ₁*ψ₂)</span>
         </li>
       </ul>
@@ -1109,7 +1145,7 @@
         <canvas id="bornCanvas" width="720" height="260" aria-label="Born rule interference comparison"></canvas>
         <div class="controls">
           <div class="control-group">
-            <label for="bornPhase">Phase between ψ₁ and ψ₂</label>
+            <label for="bornPhase">Phase between <span class="math">ψ₁</span> and <span class="math">ψ₂</span></label>
             <input type="range" id="bornPhase" min="0" max="6.28" step="0.05" value="0" />
           </div>
         </div>
@@ -1621,7 +1657,7 @@
 
     ctx.fillStyle = "rgba(148,163,184,0.9)";
     ctx.fillText("← crest moves at v = ω/k", crestPx + 8, crestPy - 10);
-    ctx.fillText("travelling wave y = sin(kx − ωt)", waveLeft, waveTop - 2);
+    ctx.fillText("y = A sin(kx − ωt + φ)", waveLeft, waveTop - 2);
 
     const readout = document.getElementById("freqVelReadout");
     if (readout) {
@@ -2547,6 +2583,156 @@
     drawPaths();
     requestAnimationFrame(pathLoop);
   })();
+
+  /* ========== Re / Im vs Θ (same angle, π/2 shift) ========== */
+  const reImThetaCanvas = document.getElementById("reImThetaCanvas");
+  const reImThetaCtx = reImThetaCanvas ? reImThetaCanvas.getContext("2d") : null;
+  const reImThetaMarkEl = document.getElementById("reImThetaMark");
+  const reImThetaPauseBtn = document.getElementById("reImThetaPause");
+  let reImThetaPaused = false;
+  let reImThetaSweep = 0;
+
+  function drawReImTheta() {
+    if (!reImThetaCtx || !reImThetaCanvas) return;
+    const W = reImThetaCanvas.width;
+    const H = reImThetaCanvas.height;
+    const padL = 52;
+    const padR = 20;
+    const padT = 40;
+    const padB = 48;
+    const plotW = W - padL - padR;
+    const plotH = H - padT - padB;
+    const midY = padT + plotH / 2;
+    const amp = plotH * 0.36;
+    const A = 1;
+    const thMin = -0.15 * Math.PI;
+    const thMax = 2.55 * Math.PI;
+    const thToX = (th) => padL + ((th - thMin) / (thMax - thMin)) * plotW;
+
+    const ctx = reImThetaCtx;
+    ctx.fillStyle = "#0e152c";
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.strokeStyle = "rgba(148,163,184,0.2)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(padL, midY);
+    ctx.lineTo(padL + plotW, midY);
+    ctx.stroke();
+
+    const tickMults = [0, 0.5, 1, 1.5, 2, 2.5];
+    const tickLabels = ["0", "π/2", "π", "3π/2", "2π", "5π/2"];
+    ctx.fillStyle = "#64748b";
+    ctx.font = "10px Segoe UI, system-ui, sans-serif";
+    for (let ti = 0; ti < tickMults.length; ti++) {
+      const th = tickMults[ti] * Math.PI;
+      if (th < thMin - 0.01 || th > thMax + 0.01) continue;
+      const x = thToX(th);
+      ctx.strokeStyle = "rgba(148,163,184,0.25)";
+      ctx.beginPath();
+      ctx.moveTo(x, padT);
+      ctx.lineTo(x, padT + plotH);
+      ctx.stroke();
+      ctx.fillText(tickLabels[ti], x - (ti === 0 ? 3 : 10), padT + plotH + 18);
+    }
+
+    const drawCurve = (fn, color, width, dash) => {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width;
+      ctx.setLineDash(dash || []);
+      ctx.beginPath();
+      for (let i = 0; i <= 200; i++) {
+        const th = thMin + (i / 200) * (thMax - thMin);
+        const x = thToX(th);
+        const y = midY - A * fn(th) * amp;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+    };
+
+    drawCurve(Math.cos, "#94a3b8", 2.5, []);
+    drawCurve(Math.sin, "#f472b6", 2.5, [5, 4]);
+
+    let markTh;
+    if (reImThetaPaused && reImThetaMarkEl) {
+      markTh = (+reImThetaMarkEl.value / 100) * (2 * Math.PI);
+    } else {
+      markTh = ((reImThetaSweep % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+    }
+    markTh = ((markTh % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+    if (!reImThetaPaused && reImThetaMarkEl) {
+      reImThetaMarkEl.value = String(Math.round((markTh / (2 * Math.PI)) * 628));
+    }
+    if (markTh >= thMin - 0.05 && markTh <= thMax + 0.05) {
+      const mx = thToX(markTh);
+      ctx.strokeStyle = "rgba(251, 191, 36, 0.92)";
+      ctx.lineWidth = 2;
+      ctx.setLineDash([5, 4]);
+      ctx.beginPath();
+      ctx.moveTo(mx, padT);
+      ctx.lineTo(mx, padT + plotH);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = "rgba(251, 191, 36, 0.95)";
+      ctx.beginPath();
+      ctx.moveTo(mx, padT - 2);
+      ctx.lineTo(mx - 5, padT - 10);
+      ctx.lineTo(mx + 5, padT - 10);
+      ctx.closePath();
+      ctx.fill();
+      const yCos = midY - A * Math.cos(markTh) * amp;
+      const ySin = midY - A * Math.sin(markTh) * amp;
+      ctx.fillStyle = "#94a3b8";
+      ctx.beginPath();
+      ctx.arc(mx, yCos, 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#f472b6";
+      ctx.beginPath();
+      ctx.arc(mx, ySin, 5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    ctx.fillStyle = "#9aa8c8";
+    ctx.font = "600 11px Segoe UI, system-ui, sans-serif";
+    ctx.fillText("A cos(Θ)", padL + 4, padT - 6);
+    ctx.fillText("A sin(Θ)", padL + 84, padT - 6);
+    ctx.font = "10px Segoe UI, system-ui, sans-serif";
+    ctx.fillText("phase angle Θ →", padL + plotW - 72, padT + plotH + 14);
+    ctx.fillText("sin(Θ) = cos(Θ − π/2)", W - 168, padT + 12);
+
+    const readout = document.getElementById("reImThetaReadout");
+    if (readout) {
+      const c = Math.cos(markTh);
+      const s = Math.sin(markTh);
+      const deg = ((markTh * 180) / Math.PI).toFixed(1);
+      readout.textContent =
+        `At Θ = ${markTh.toFixed(3)} rad (${deg}°): A cos(Θ) = ${(A * c).toFixed(3)}, A sin(Θ) = ${(A * s).toFixed(3)}. ` +
+        `Same Θ for both; sine lags cosine by π/2 rad along Θ (quarter cycle). Pause and drag the slider to compare values.`;
+    }
+  }
+
+  if (reImThetaCanvas && reImThetaCtx) {
+    if (reImThetaMarkEl) reImThetaMarkEl.addEventListener("input", drawReImTheta);
+    if (reImThetaPauseBtn) {
+      reImThetaPauseBtn.addEventListener("click", () => {
+        reImThetaPaused = !reImThetaPaused;
+        reImThetaPauseBtn.textContent = reImThetaPaused ? "Play" : "Pause";
+        if (!reImThetaPaused && reImThetaMarkEl) {
+          reImThetaSweep = (+reImThetaMarkEl.value / 100) * (2 * Math.PI);
+        }
+        drawReImTheta();
+      });
+    }
+    (function reImThetaLoop() {
+      if (!reImThetaPaused) {
+        reImThetaSweep += 0.035;
+      }
+      drawReImTheta();
+      requestAnimationFrame(reImThetaLoop);
+    })();
+  }
 
   /* ========== Bridge: classical wave → ψ ========== */
   const bridgeCanvas = document.getElementById("bridgeCanvas");
