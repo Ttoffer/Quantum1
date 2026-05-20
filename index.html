@@ -142,6 +142,18 @@
       margin: 1.5rem 0 0.5rem;
       color: #b8c8ea;
     }
+    h4 {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin: 1.35rem 0 0.5rem;
+      color: #b8c8ea;
+    }
+    .svg-caption {
+      font-size: 0.88rem;
+      color: var(--muted);
+      text-align: center;
+      margin: 0.5rem 0 0;
+    }
     p { margin: 0.75rem 0; }
     ul, ol { margin: 0.6rem 0; padding-left: 1.25rem; }
     li { margin: 0.35rem 0; }
@@ -1043,11 +1055,161 @@
 
       <h3>Real, Imaginary, and what you measure</h3>
       <p>The animation shows a snapshot of one wave packet. The <strong>Real</strong> and <strong>Imaginary</strong> curves wiggle along <span class="math">x</span> and oscillate in time. The quantity that feeds Born’s rule is the <strong>squared magnitude</strong>, which uses both parts together:</p>
-      <div class="eq-block" role="math">
-        <span class="label">Squared magnitude</span>
+      <div class="eq-block" role="math" id="squared-magnitude">
+        <span class="label">Squared magnitude (what detectors use)</span>
         <span class="math">|ψ|² = (Real part)² + (Imaginary part)²</span>
       </div>
       <p>Detectors do not print “Real” or “Imaginary” separately. They respond to <span class="math">|ψ|²</span> (probability density) — see <a href="#born">section 9</a>.</p>
+
+      <h3 id="squaring-psi">Two ways to “square” a complex number</h3>
+      <p>
+        If you have met complex numbers elsewhere, you may remember that multiplying a number by <em>itself</em> —
+        <span class="math">z² = z × z</span> — usually gives <strong>both rotation and scaling</strong> in the complex plane:
+        the length becomes <span class="math">|z|²</span> and the angle doubles.
+        That is correct mathematics, but it is <strong>not</strong> what Born’s rule means by “squaring” <span class="math">ψ</span>.
+      </p>
+      <div class="eq-block text-left" role="math">
+        <span class="label">Ordinary square (complex result — phase matters)</span>
+        <span class="math">ψ² = ψ × ψ</span>
+        &nbsp;→&nbsp; generally <strong>still complex</strong>; rotates and scales the arrow.
+      </div>
+      <div class="eq-block text-left" role="math">
+        <span class="label">Squared magnitude (real result — probability size)</span>
+        <span class="math">|ψ|² = ψ × ψ*</span>
+        &nbsp;→&nbsp; always a <strong>real number ≥ 0</strong>; no leftover phase.
+        Here <span class="math">ψ*</span> is the <strong>complex conjugate</strong> of <span class="math">ψ</span>.
+        Same value as <span class="math">(Real)² + (Imaginary)²</span>.
+      </div>
+
+      <h4 id="conjugate">What is the complex conjugate?</h4>
+      <p>
+        Every complex number has a <strong>partner</strong> called its conjugate.
+        You keep the <strong>Real part</strong> the same and change the sign of the <strong>Imaginary part</strong>.
+        On the complex-plane picture (same arrow diagram as above), the conjugate is the <strong>mirror image across the horizontal (Real) axis</strong>:
+        same length, opposite tilt above/below the axis.
+      </p>
+
+      <div class="diagram-wrap">
+        <p class="demo-label">Conjugate mirror — <span class="math">ψ = 3 + 4i</span> and <span class="math">ψ* = 3 − 4i</span></p>
+        <svg id="conjugateMirrorSvg" viewBox="0 0 720 260" width="720" height="260" role="img" aria-labelledby="conjugateMirrorTitle conjugateMirrorDesc">
+          <title id="conjugateMirrorTitle">Complex conjugate as mirror across the Real axis</title>
+          <desc id="conjugateMirrorDesc">ψ points to 3 plus 4i above the Real axis; ψ star is the mirror image below the axis at 3 minus 4i; both have length 5.</desc>
+          <rect width="720" height="260" fill="#0e152c" rx="8"/>
+          <!-- axes -->
+          <line x1="48" y1="160" x2="520" y2="160" stroke="rgba(148,163,184,0.35)" stroke-width="1.5"/>
+          <line x1="200" y1="228" x2="200" y2="28" stroke="rgba(148,163,184,0.35)" stroke-width="1.5"/>
+          <text x="528" y="164" fill="#9aa8c8" font-family="Segoe UI, system-ui, sans-serif" font-size="12" font-weight="600">Real</text>
+          <text x="152" y="24" fill="#9aa8c8" font-family="Segoe UI, system-ui, sans-serif" font-size="12" font-weight="600">Imaginary</text>
+          <!-- mirror line -->
+          <line x1="72" y1="160" x2="488" y2="160" stroke="rgba(251,191,36,0.55)" stroke-width="2" stroke-dasharray="8 6"/>
+          <text x="496" y="152" fill="#fbbf24" font-family="Segoe UI, system-ui, sans-serif" font-size="11">mirror (Real axis)</text>
+          <!-- real projections -->
+          <line x1="200" y1="160" x2="272" y2="160" stroke="rgba(56,189,248,0.5)" stroke-width="2"/>
+          <text x="228" y="176" fill="#38bdf8" font-family="Cambria Math, Times New Roman, serif" font-size="13">3</text>
+          <!-- imag legs -->
+          <line x1="272" y1="160" x2="272" y2="48" stroke="rgba(244,114,182,0.55)" stroke-width="2" stroke-dasharray="4 4"/>
+          <line x1="272" y1="160" x2="272" y2="272" stroke="rgba(244,114,182,0.55)" stroke-width="2" stroke-dasharray="4 4"/>
+          <text x="280" y="100" fill="#f472b6" font-family="Segoe UI, system-ui, sans-serif" font-size="11">+4i</text>
+          <text x="280" y="228" fill="#f472b6" font-family="Segoe UI, system-ui, sans-serif" font-size="11">−4i</text>
+          <!-- psi -->
+          <line x1="200" y1="160" x2="272" y2="48" stroke="#a78bfa" stroke-width="3.5" marker-end="url(#arrowPurple)"/>
+          <circle cx="272" cy="48" r="7" fill="#a78bfa"/>
+          <text x="282" y="44" fill="#e9d5ff" font-family="Cambria Math, Times New Roman, serif" font-size="16" font-weight="600">ψ</text>
+          <!-- psi* -->
+          <line x1="200" y1="160" x2="272" y2="272" stroke="#f472b6" stroke-width="3" stroke-dasharray="7 5" marker-end="url(#arrowPink)"/>
+          <circle cx="272" cy="272" r="7" fill="#f472b6"/>
+          <text x="282" y="278" fill="#fbcfe8" font-family="Cambria Math, Times New Roman, serif" font-size="16" font-weight="600">ψ*</text>
+          <!-- symmetry arc hint -->
+          <path d="M 248 88 A 40 40 0 0 1 248 232" fill="none" stroke="rgba(167,139,250,0.2)" stroke-width="1.5" stroke-dasharray="3 5"/>
+          <text x="208" y="252" fill="#9aa8c8" font-family="Segoe UI, system-ui, sans-serif" font-size="11">same length |ψ| = |ψ*| = 5</text>
+          <defs>
+            <marker id="arrowPurple" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+              <path d="M0,0 L8,4 L0,8 Z" fill="#a78bfa"/>
+            </marker>
+            <marker id="arrowPink" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+              <path d="M0,0 L8,4 L0,8 Z" fill="#f472b6"/>
+            </marker>
+          </defs>
+        </svg>
+        <p class="svg-caption">Purple <span class="math">ψ</span> above the axis; pink <span class="math">ψ*</span> is its mirror below. Real part <span class="math">3</span> is shared; Imaginary parts <span class="math">+4</span> and <span class="math">−4</span> swap.</p>
+      </div>
+
+      <div class="eq-block">
+        <span class="math">ψ = a + i b &nbsp;⇒&nbsp; ψ* = a − i b</span>
+      </div>
+      <p>
+        The star <span class="math">*</span> is standard notation for “take the conjugate”.
+        Multiplying <span class="math">ψ</span> by <span class="math">ψ*</span> is <strong>not</strong> squaring in the “rotate and scale” sense;
+        it is a deliberate pairing that <strong>cancels the imaginary cross-terms</strong> and leaves a plain real number:
+      </p>
+      <div class="eq-block text-left">
+        <span class="math">(a + i b)(a − i b) = a² + b²</span>
+        &nbsp;(the middle terms <span class="math">+i ab</span> and <span class="math">−i ab</span> cancel)
+      </div>
+      <p>
+        That is why detectors care about <span class="math">|ψ|²</span>: probability size depends on how big the amplitude is
+        (<span class="math">a² + b²</span>), not on which way the arrow points around the cycle.
+        You still need the phase of <span class="math">ψ</span> when <strong>adding</strong> two contributions — but after the sum, the conjugate step turns the result into something measurable.
+      </p>
+
+      <h4 id="where-modulus-squared">Where does <span class="math">|ψ|² = ψ ψ*</span> come from?</h4>
+      <p><strong>Part 1 — clean mathematics (not quantum guesswork).</strong></p>
+      <p>
+        For <em>any</em> complex number <span class="math">z = a + i b</span>, the <strong>modulus squared</strong> is defined as
+        <span class="math">|z|² = a² + b²</span> — the square of the arrow’s length.
+        Complex analysis defines this as <span class="math">z × z*</span> because that product always gives the same real, non‑negative number and is the natural “length squared” in the plane.
+        So the conjugate recipe is solid everyday maths before we mention electrons.
+      </p>
+      <p><strong>Part 2 — why physics uses it for probability.</strong></p>
+      <p>
+        Max Born (1926) proposed that after preparing a quantum state, the chance of finding a particle in a small region is tied to how large the wave function is there — specifically proportional to <span class="math">|ψ|²</span>, not to <span class="math">ψ</span> itself.
+        That was a <strong>physical postulate</strong> matched to experiment (double-slit dots, spectral lines, and so on), not something deduced from classical waves alone.
+      </p>
+      <p><strong>Part 3 — deeper meaning (why not some other formula?).</strong></p>
+      <ul>
+        <li><strong>Outcomes must be real numbers.</strong> Probabilities cannot be complex; <span class="math">ψ</span> alone is the wrong type of object to read off a meter.</li>
+        <li><strong>Phase should not change measured size.</strong> Multiplying <span class="math">ψ</span> by a pure phase factor <span class="math">e^{iθ}</span> rotates the arrow but must not change detection rates; <span class="math">|ψ|²</span> has that property, while <span class="math">ψ²</span> does not.</li>
+        <li><strong>Interference needs add-then-square.</strong> Experiments force us to add amplitudes <span class="math">ψ₁ + ψ₂</span> first, then take <span class="math">|·|²</span>. That pattern is what the conjugate formula encodes when expanded into Real and Imaginary parts.</li>
+        <li><strong>Inner product picture.</strong> In full quantum theory, states live in a Hilbert space; probability is built from the inner product <span class="math">⟨ψ|ψ⟩</span>, which in coordinates is exactly <span class="math">∫ ψ* ψ dx</span>. The conjugate is not a trick — it is how “overlap” and “length squared” are defined for complex vectors.</li>
+      </ul>
+      <div class="note">
+        <strong>Plain summary.</strong>
+        <span class="math">ψ ψ*</span> is the standard way to square a complex number’s length.
+        Born’s rule <em>chooses</em> that quantity as probability density because nature’s counting statistics follow “add complex amplitudes, then take modulus squared” — deeper theory (Hilbert space, operators, measurement) explains why that choice is consistent, but the lab fact came first.
+      </div>
+
+      <p class="demo-label">Worked example — one complex number at a point</p>
+      <p>Take a realistic amplitude (same 3–4–5 triangle as on many complex-number diagrams):</p>
+      <div class="eq-block">
+        <span class="math">ψ = 3 + 4i</span>
+      </div>
+      <ol class="math-steps">
+        <li>
+          <div class="step-title">① Read Real and Imaginary</div>
+          Real part <span class="math">= 3</span>, Imaginary part <span class="math">= 4</span>.
+          Length <span class="math">|ψ| = √(3² + 4²) = 5</span>.
+          Phase <span class="math">φ ≈ arctan(4/3) ≈ 53°</span> (angle of the arrow).
+        </li>
+        <li>
+          <div class="step-title">② If we square ψ itself (<span class="math">ψ² = ψ × ψ</span>)</div>
+          <span class="math">(3 + 4i)(3 + 4i) = 9 + 24i + 16i² = 9 + 24i − 16 = −7 + 24i</span>.
+          New length <span class="math">|ψ²| = √(7² + 24²) = 25 = 5²</span> (scaled).
+          New angle ≈ <span class="math">106°</span> — about <strong>twice</strong> the original <span class="math">53°</span> (rotated).
+          So <span class="math">ψ²</span> is still a complex arrow — not a probability.
+        </li>
+        <li>
+          <div class="step-title">③ Squared magnitude for probability (<span class="math">|ψ|² = ψ ψ*</span>)</div>
+          Conjugate of <span class="math">3 + 4i</span>: flip Imaginary sign → <span class="math">ψ* = 3 − 4i</span> (mirror below the Real axis).
+          <span class="math">ψ ψ* = (3 + 4i)(3 − 4i) = 9 + 16 = 25</span> — the <span class="math">±12i</span> cross-terms cancel.
+          Or directly: <span class="math">3² + 4² = 25</span>.
+          Result is a plain <strong>real</strong> number on the positive axis — suitable as a probability <em>density</em> (before normalisation over all space).
+        </li>
+      </ol>
+      <div class="note">
+        <strong>Takeaway.</strong>
+        “Squaring” in quantum probability means <span class="math">|ψ|²</span> (with the conjugate), not <span class="math">ψ²</span>.
+        Interference uses addition of <span class="math">ψ</span> first; only then do we form <span class="math">|ψ₁ + ψ₂|²</span> — worked out with numbers in <a href="#born-two-waves">section 9</a>.
+      </div>
 
       <div class="diagram-wrap">
         <p class="demo-label">Snapshot of <span class="math">ψ(x)</span> — Real part, Imaginary part, and <span class="math">|ψ|²</span></p>
@@ -1071,7 +1233,7 @@
       <div class="eq-block" role="math">
         <span class="math">probability density = |ψ₁ + ψ₂|²</span>
       </div>
-      <p>That is different from adding probabilities separately, <span class="math">|ψ₁|² + |ψ₂|²</span>. The extra piece — the <strong>interference term</strong> — involves the phases of <span class="math">ψ₁</span> and <span class="math">ψ₂</span> together. It is worked out step by step in <a href="#born">section 9</a>; the ripple tank and detection-screen demos show the same idea for water height and for quantum dots.</p>
+      <p>That is different from adding probabilities separately, <span class="math">|ψ₁|² + |ψ₂|²</span>. The extra piece — the <strong>interference term</strong> — involves the phases of <span class="math">ψ₁</span> and <span class="math">ψ₂</span> together. It is worked out step by step in <a href="#born-two-waves">section 9</a>; the ripple tank and detection-screen demos show the same idea for water height and for quantum dots.</p>
     </section>
 
     <section id="born">
@@ -1135,10 +1297,55 @@
         </li>
         <li>
           <div class="step-title">Step 3 — expand (Real and Imaginary parts of both <span class="math">ψ₁</span> and <span class="math">ψ₂</span>)</div>
-          <span class="math">|ψ₁ + ψ₂|² = |ψ₁|² + |ψ₂|² + 2 × (real part of ψ₁*ψ₂)</span>
+          Write <span class="math">ψ₁ = a₁ + i b₁</span> and <span class="math">ψ₂ = a₂ + i b₂</span>. After multiplying out (or using <span class="math">ψ ψ* = |ψ|²</span>),
+          <span class="math">|ψ₁ + ψ₂|² = |ψ₁|² + |ψ₂|² + 2(a₁a₂ + b₁b₂)</span>.
+          The cross term <span class="math">2(a₁a₂ + b₁b₂)</span> is the <strong>interference term</strong> (same as <span class="math">2 ×</span> real part of <span class="math">ψ₁*ψ₂</span>).
         </li>
       </ul>
-      <p>The last term is the <strong>interference term</strong>: it depends on the <em>relative phase</em> between the two complex amplitudes (how their Real and Imaginary parts line up). It can be positive (bright fringe) or negative (dark fringe — near-complete cancellation, hence a slim band). Without it, you would only get two overlapping blobs — never the full pattern. This is <strong>not</strong> “Real interfering with Imaginary” within a single <span class="math">ψ</span> — see <a href="#psi-interference">section 8</a>.</p>
+
+      <h3 id="born-two-waves">Numerical example — <span class="math">|ψ₁ + ψ₂|²</span> at one point on the screen</h3>
+      <p>
+        Suppose slit 1 contributes <span class="math">ψ₁ = 3 + 4i</span> and slit 2 contributes <span class="math">ψ₂ = 4 + 3i</span> at the same point
+        (different phase — lengths both 5, but arrows point in different directions).
+        This is <strong>not</strong> “square each slit then add”; we add amplitudes first, then take squared magnitude.
+      </p>
+      <ol class="math-steps">
+        <li>
+          <div class="step-title">① Separate probabilities (no interference)</div>
+          <span class="math">|ψ₁|² = 3² + 4² = 25</span>,
+          <span class="math">|ψ₂|² = 4² + 3² = 25</span>,
+          sum <span class="math">|ψ₁|² + |ψ₂|² = 50</span>.
+        </li>
+        <li>
+          <div class="step-title">② Add complex amplitudes first</div>
+          Real parts: <span class="math">3 + 4 = 7</span>.
+          Imaginary parts: <span class="math">4 + 3 = 7</span>.
+          Total <span class="math">ψ = ψ₁ + ψ₂ = 7 + 7i</span>.
+        </li>
+        <li>
+          <div class="step-title">③ Squared magnitude of the sum (quantum)</div>
+          <span class="math">|ψ|² = 7² + 7² = 98</span>.
+          Extra brightness beyond 50 comes from the interference term.
+        </li>
+        <li>
+          <div class="step-title">④ Interference term explicitly</div>
+          <span class="math">98 − 50 = 48</span>.
+          Check with the formula: <span class="math">ψ₁* = 3 − 4i</span>,
+          <span class="math">ψ₁*ψ₂ = (3 − 4i)(4 + 3i) = 24 − 7i</span>, real part <span class="math">= 24</span>,
+          so <span class="math">2 × 24 = 48</span>.
+          Phases partly aligned → <strong>constructive</strong> fringe (brighter than 50 alone).
+        </li>
+      </ol>
+      <p>Drag the phase slider below to see the opposite case: when paths are out of step, the green curve dips because <span class="math">|ψ₁ + ψ₂|²</span> can be much smaller than <span class="math">|ψ₁|² + |ψ₂|²</span>.</p>
+      <ol class="math-steps">
+        <li>
+          <div class="step-title">Quick contrast — same size, opposite direction</div>
+          Take <span class="math">ψ₁ = 1</span> and <span class="math">ψ₂ = −1</span> (pure real, 180° apart).
+          Then <span class="math">ψ₁ + ψ₂ = 0</span>, so <span class="math">|ψ₁ + ψ₂|² = 0</span> (dark fringe),
+          but <span class="math">|ψ₁|² + |ψ₂|² = 2</span> (you would wrongly predict brightness if you added probabilities first).
+        </li>
+      </ol>
+      <p>The cross term is the <strong>interference term</strong>: it depends on the <em>relative phase</em> between the two complex amplitudes (how their Real and Imaginary parts line up). It can be positive (bright fringe) or negative (dark fringe — near-complete cancellation, hence a slim band). Without it, you would only get two overlapping blobs — never the full pattern. This is <strong>not</strong> “Real interfering with Imaginary” within a single <span class="math">ψ</span> — see <a href="#psi-interference">section 8</a> and <a href="#squaring-psi">ψ² versus <span class="math">|ψ|²</span></a>.</p>
 
       <div class="diagram-wrap">
         <p class="demo-label">Compare |ψ₁|² + |ψ₂|² vs |ψ₁ + ψ₂|²</p>
